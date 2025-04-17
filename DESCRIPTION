@@ -1,0 +1,15 @@
+Package: geosynth
+Type: Package
+Title: Creating synthetic georeferenced data
+Version: 0.1.0
+Author: Stefan Jünger
+Maintainer: Stefan Jünger <stefan.juenger@gesis.org>
+Description: Creates synthetic georeferenced (points) data from muncipal input 
+  data
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    dplyr,
+    sf
+RoxygenNote: 7.3.2

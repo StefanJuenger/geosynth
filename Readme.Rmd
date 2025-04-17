@@ -5,6 +5,7 @@ output: github_document
 # geosynth
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-red.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
 This R package provides tools to create synthetic versions of geospatial survey data that mimic the spatial structure of the original dataset without exposing confidential coordinates. It is designed to support spatial linking workflows--such as joining survey data to contextual geographic information--by ensuring the synthetic data produces results that closely resemble the original data. This enables testing, prototyping, and methodological development without accessing restricted location data.

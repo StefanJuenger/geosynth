@@ -1,15 +1,31 @@
 Package: geosynth
 Type: Package
-Title: Creating synthetic georeferenced data
-Version: 0.1.0
+Title: Synthetic Coordinates for German Survey Data
+Version: 0.8.0
 Author: Stefan Jünger
 Maintainer: Stefan Jünger <stefan.juenger@gesis.org>
-Description: Creates synthetic georeferenced (points) data from muncipal input 
-  data
+Description: Provides tools to generate synthetic georeferenced data that 
+    mimic the spatial structure of German survey datasets without exposing 
+    confidential respondent coordinates. The package supports spatial linking 
+    workflows by enabling pipeline development, testing, and methodological 
+    prototyping outside of secure data access environments.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyData: true
 Imports: 
+    cli,
     dplyr,
-    sf
-RoxygenNote: 7.3.2
+    purrr,
+    rlang,
+    sf,
+    tidyr
+RoxygenNote: 7.3.3
+Depends: 
+    R (>= 3.5)
+Suggests: 
+    glue,
+    readr,
+    readxl,
+    stringr,
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3

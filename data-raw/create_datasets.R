@@ -249,6 +249,10 @@ create_fake_survey_coordinates <- function(
     purrr::map_dfr(draw_grids) |>
     dplyr::mutate(id = 1:dplyr::n(), .before = 1)
 
+  fake_survey_coordinates <-
+    tibble::as_tibble(fake_survey_coordinates) |>
+    sf::st_as_sf()
+
   # Save the dataset to package data
   usethis::use_data(fake_survey_coordinates, overwrite = TRUE)
 }

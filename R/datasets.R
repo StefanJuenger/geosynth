@@ -83,7 +83,7 @@
 #' Fake survey coordinates that are not even synthetic and only serve
 #' demonstration purposes
 #'
-#' @format A data frame/simple feature collection with 3,004 rows and 3 columns:
+#' @format A data frame/simple feature collection with 2,990 rows and 3 columns:
 #' \describe{
 #'   \item{id}{Fake respondent identifier}
 #'   \item{ags}{8-digit German municipality identifier ("Allgemeiner Gemeindeschlüssel")}

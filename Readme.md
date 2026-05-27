@@ -11,9 +11,8 @@ stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://
 [![R-CMD-check.yaml](https://github.com/StefanJuenger/geosynth/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/StefanJuenger/geosynth/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/StefanJuenger/geosynth/graph/badge.svg)](https://app.codecov.io/gh/StefanJuenger/geosynth)
-![main](https://img.shields.io/github/last-commit/badges/shields/main)
+[![Last-changedate](https://img.shields.io/github/last-commit/StefanJuenger/geosynth)](/commits/main)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://choosealicense.com/licenses/mit/)
-<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2025--05--27-brightgreen.svg)](/commits/master) -->
 <!-- badges: end -->
 
 This `R` package provides tools to create low-threshold synthetic
@@ -277,9 +276,9 @@ synthetic_sample <- geosynth::draw_sample(sample_frame = sample_frame)
 
     ## • Randomization: TRUE
 
-    ## ✔ 1536 municipalities selected for sampling
+    ## ✔ 1533 municipalities selected for sampling
 
-    ## Drawing coordinates ■■                                 5% | ETA: 20sDrawing coordinates ■■■                                6% | ETA: 22sDrawing coordinates ■■■                                7% | ETA: 21sDrawing coordinates ■■■                                8% | ETA: 21sDrawing coordinates ■■■■                               8% | ETA: 22sDrawing coordinates ■■■■                               9% | ETA: 22sDrawing coordinates ■■■■                              10% | ETA: 22sDrawing coordinates ■■■■                              11% | ETA: 21sDrawing coordinates ■■■■                              12% | ETA: 22sDrawing coordinates ■■■■■                             12% | ETA: 21sDrawing coordinates ■■■■■                             13% | ETA: 21sDrawing coordinates ■■■■■                             14% | ETA: 21sDrawing coordinates ■■■■■                             14% | ETA: 21sDrawing coordinates ■■■■■■                            15% | ETA: 21sDrawing coordinates ■■■■■■                            16% | ETA: 21sDrawing coordinates ■■■■■■                            17% | ETA: 21sDrawing coordinates ■■■■■■                            17% | ETA: 21sDrawing coordinates ■■■■■■■                           18% | ETA: 21sDrawing coordinates ■■■■■■■                           19% | ETA: 20sDrawing coordinates ■■■■■■■                           20% | ETA: 21sDrawing coordinates ■■■■■■■                           21% | ETA: 20sDrawing coordinates ■■■■■■■■                          22% | ETA: 20sDrawing coordinates ■■■■■■■■                          22% | ETA: 20sDrawing coordinates ■■■■■■■■                          23% | ETA: 20sDrawing coordinates ■■■■■■■■                          24% | ETA: 20sDrawing coordinates ■■■■■■■■                          24% | ETA: 20sDrawing coordinates ■■■■■■■■■                         25% | ETA: 19sDrawing coordinates ■■■■■■■■■                         26% | ETA: 19sDrawing coordinates ■■■■■■■■■                         27% | ETA: 19sDrawing coordinates ■■■■■■■■■                         27% | ETA: 19sDrawing coordinates ■■■■■■■■■                         28% | ETA: 19sDrawing coordinates ■■■■■■■■■■                        29% | ETA: 18sDrawing coordinates ■■■■■■■■■■                        30% | ETA: 18sDrawing coordinates ■■■■■■■■■■                        31% | ETA: 18sDrawing coordinates ■■■■■■■■■■                        31% | ETA: 18sDrawing coordinates ■■■■■■■■■■■                       32% | ETA: 17sDrawing coordinates ■■■■■■■■■■■                       33% | ETA: 17sDrawing coordinates ■■■■■■■■■■■                       34% | ETA: 17sDrawing coordinates ■■■■■■■■■■■                       34% | ETA: 17sDrawing coordinates ■■■■■■■■■■■                       35% | ETA: 17sDrawing coordinates ■■■■■■■■■■■■                      35% | ETA: 17sDrawing coordinates ■■■■■■■■■■■■                      36% | ETA: 17sDrawing coordinates ■■■■■■■■■■■■                      37% | ETA: 16sDrawing coordinates ■■■■■■■■■■■■                      38% | ETA: 16sDrawing coordinates ■■■■■■■■■■■■■                     39% | ETA: 16sDrawing coordinates ■■■■■■■■■■■■■                     40% | ETA: 16sDrawing coordinates ■■■■■■■■■■■■■                     40% | ETA: 16sDrawing coordinates ■■■■■■■■■■■■■                     41% | ETA: 15sDrawing coordinates ■■■■■■■■■■■■■■                    42% | ETA: 15sDrawing coordinates ■■■■■■■■■■■■■■                    43% | ETA: 15sDrawing coordinates ■■■■■■■■■■■■■■                    44% | ETA: 15sDrawing coordinates ■■■■■■■■■■■■■■                    45% | ETA: 14sDrawing coordinates ■■■■■■■■■■■■■■■                   46% | ETA: 14sDrawing coordinates ■■■■■■■■■■■■■■■                   46% | ETA: 14sDrawing coordinates ■■■■■■■■■■■■■■■                   47% | ETA: 14sDrawing coordinates ■■■■■■■■■■■■■■■                   48% | ETA: 14sDrawing coordinates ■■■■■■■■■■■■■■■■                  49% | ETA: 13sDrawing coordinates ■■■■■■■■■■■■■■■■                  50% | ETA: 13sDrawing coordinates ■■■■■■■■■■■■■■■■                  51% | ETA: 13sDrawing coordinates ■■■■■■■■■■■■■■■■■                 52% | ETA: 12sDrawing coordinates ■■■■■■■■■■■■■■■■■                 53% | ETA: 12sDrawing coordinates ■■■■■■■■■■■■■■■■■                 53% | ETA: 12sDrawing coordinates ■■■■■■■■■■■■■■■■■                 54% | ETA: 12sDrawing coordinates ■■■■■■■■■■■■■■■■■                 54% | ETA: 12sDrawing coordinates ■■■■■■■■■■■■■■■■■■                55% | ETA: 11sDrawing coordinates ■■■■■■■■■■■■■■■■■■                56% | ETA: 11sDrawing coordinates ■■■■■■■■■■■■■■■■■■                57% | ETA: 11sDrawing coordinates ■■■■■■■■■■■■■■■■■■                57% | ETA: 11sDrawing coordinates ■■■■■■■■■■■■■■■■■■                58% | ETA: 11sDrawing coordinates ■■■■■■■■■■■■■■■■■■■               59% | ETA: 11sDrawing coordinates ■■■■■■■■■■■■■■■■■■■               60% | ETA: 11sDrawing coordinates ■■■■■■■■■■■■■■■■■■■               61% | ETA: 10sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■              62% | ETA: 10sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■              62% | ETA: 10sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■              63% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■              65% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■             65% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■             66% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■             67% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■             68% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■            69% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■            70% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■            71% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■           72% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■           72% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■           73% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■           74% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■           75% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■          76% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■          77% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■          78% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■         79% | ETA:  5sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■         80% | ETA:  5sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■         80% | ETA:  5sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■         81% | ETA:  5sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■        82% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■        84% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■       85% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■       87% | ETA:  3sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      88% | ETA:  3sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      90% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      92% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     93% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     95% | ETA:  1sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    96% | ETA:  1sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    98% | ETA:  0sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s                                                                     ✔ Sample of 2990 coordinates drawn
+    ## Drawing coordinates ■■■■                              10% | ETA:  9sDrawing coordinates ■■■■                              11% | ETA:  9sDrawing coordinates ■■■■■                             12% | ETA: 10sDrawing coordinates ■■■■■                             14% | ETA: 10sDrawing coordinates ■■■■■■                            15% | ETA: 10sDrawing coordinates ■■■■■■                            17% | ETA: 10sDrawing coordinates ■■■■■■■                           19% | ETA:  9sDrawing coordinates ■■■■■■■                           19% | ETA: 10sDrawing coordinates ■■■■■■■                           20% | ETA: 10sDrawing coordinates ■■■■■■■                           22% | ETA: 10sDrawing coordinates ■■■■■■■■                          23% | ETA: 10sDrawing coordinates ■■■■■■■■                          24% | ETA: 10sDrawing coordinates ■■■■■■■■                          25% | ETA: 10sDrawing coordinates ■■■■■■■■■                         26% | ETA: 10sDrawing coordinates ■■■■■■■■■                         28% | ETA: 10sDrawing coordinates ■■■■■■■■■■                        29% | ETA: 10sDrawing coordinates ■■■■■■■■■■                        31% | ETA:  9sDrawing coordinates ■■■■■■■■■■■                       32% | ETA:  9sDrawing coordinates ■■■■■■■■■■■                       34% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■                      35% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■                      37% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■                      38% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■                     40% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■                     41% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■                    43% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■                    44% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■                   46% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■                   47% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■                  49% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■                  50% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■                  52% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■                 53% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■                 55% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■                56% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■                57% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■               58% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■               60% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■               61% | ETA:  5sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■              63% | ETA:  5sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■              65% | ETA:  5sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■             67% | ETA:  5sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■             68% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■            70% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■            71% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■           73% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■           75% | ETA:  3sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■          76% | ETA:  3sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■          78% | ETA:  3sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■         80% | ETA:  3sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■         81% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■        83% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■        85% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■       86% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■       88% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      89% | ETA:  1sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      91% | ETA:  1sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     93% | ETA:  1sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     94% | ETA:  1sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    96% | ETA:  1sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    97% | ETA:  0sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    98% | ETA:  0sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s                                                                     ✔ Sample of 2990 coordinates drawn
     ## ✔ Finished drawing sample
 
 ``` r
@@ -289,21 +288,21 @@ synthetic_sample
     ## Simple feature collection with 2990 features and 2 fields
     ## Geometry type: POINT
     ## Dimension:     XY
-    ## Bounding box:  xmin: 4041500 ymin: 2703500 xmax: 4671500 ymax: 3531500
+    ## Bounding box:  xmin: 4034500 ymin: 2710500 xmax: 4671500 ymax: 3524500
     ## Projected CRS: ETRS89-extended / LAEA Europe
     ## # A tibble: 2,990 × 3
     ##    inspid1km                                geometry ags     
     ##    <chr>                                 <POINT [m]> <chr>   
-    ##  1 CRS3035RES1000mN2960000E4222000 (4222500 2960500) 06432022
-    ##  2 CRS3035RES1000mN3045000E4336000 (4336500 3045500) 09673182
-    ##  3 CRS3035RES1000mN3335000E4193000 (4193500 3335500) 03451004
-    ##  4 CRS3035RES1000mN2829000E4260000 (4260500 2829500) 08415060
-    ##  5 CRS3035RES1000mN2927000E4158000 (4158500 2927500) 07312000
-    ##  6 CRS3035RES1000mN2839000E4277000 (4277500 2839500) 08116071
-    ##  7 CRS3035RES1000mN3193000E4618000 (4618500 3193500) 12052000
-    ##  8 CRS3035RES1000mN3021000E4305000 (4305500 3021500) 09672113
-    ##  9 CRS3035RES1000mN3241000E4186000 (4186500 3241500) 03404000
-    ## 10 CRS3035RES1000mN2728000E4546000 (4546500 2728500) 09172116
+    ##  1 CRS3035RES1000mN2981000E4063000 (4063500 2981500) 07232053
+    ##  2 CRS3035RES1000mN3251000E4602000 (4602500 3251500) 12067426
+    ##  3 CRS3035RES1000mN3103000E4503000 (4503500 3103500) 14729140
+    ##  4 CRS3035RES1000mN2792000E4226000 (4226500 2792500) 08417054
+    ##  5 CRS3035RES1000mN3152000E4119000 (4119500 3152500) 05113000
+    ##  6 CRS3035RES1000mN3080000E4362000 (4362500 3080500) 16067019
+    ##  7 CRS3035RES1000mN2980000E4476000 (4476500 2980500) 09377159
+    ##  8 CRS3035RES1000mN3128000E4074000 (4074500 3128500) 05116000
+    ##  9 CRS3035RES1000mN2986000E4067000 (4067500 2986500) 07232079
+    ## 10 CRS3035RES1000mN3253000E4301000 (4301500 3253500) 03241001
     ## # ℹ 2,980 more rows
 
 At this stage, `synthetic_sample` already provides a realistic spatial
@@ -354,21 +353,21 @@ synthetic_shuffled
     ## Simple feature collection with 2990 features and 2 fields
     ## Geometry type: POINT
     ## Dimension:     XY
-    ## Bounding box:  xmin: 4041500 ymin: 2703500 xmax: 4671500 ymax: 3531500
+    ## Bounding box:  xmin: 4034500 ymin: 2710500 xmax: 4671500 ymax: 3524500
     ## Projected CRS: ETRS89-extended / LAEA Europe
     ## # A tibble: 2,990 × 3
     ##    inspid1km                                geometry ags     
     ##    <chr>                                 <POINT [m]> <chr>   
-    ##  1 CRS3035RES1000mN2960000E4222000 (4222500 2960500) 06432022
-    ##  2 CRS3035RES1000mN3045000E4336000 (4336500 3045500) 09673182
-    ##  3 CRS3035RES1000mN3335000E4193000 (4193500 3335500) 03451004
-    ##  4 CRS3035RES1000mN2829000E4260000 (4260500 2829500) 08415060
-    ##  5 CRS3035RES1000mN2927000E4158000 (4158500 2927500) 07312000
-    ##  6 CRS3035RES1000mN2839000E4277000 (4277500 2839500) 08116071
-    ##  7 CRS3035RES1000mN3193000E4618000 (4618500 3193500) 12052000
-    ##  8 CRS3035RES1000mN3021000E4305000 (4305500 3021500) 09672113
-    ##  9 CRS3035RES1000mN3241000E4186000 (4186500 3241500) 03404000
-    ## 10 CRS3035RES1000mN2728000E4546000 (4546500 2728500) 09172116
+    ##  1 CRS3035RES1000mN2981000E4063000 (4063500 2981500) 07232053
+    ##  2 CRS3035RES1000mN3251000E4602000 (4602500 3251500) 12067426
+    ##  3 CRS3035RES1000mN3103000E4503000 (4503500 3103500) 14729140
+    ##  4 CRS3035RES1000mN2792000E4226000 (4226500 2792500) 08417054
+    ##  5 CRS3035RES1000mN3152000E4119000 (4119500 3152500) 05113000
+    ##  6 CRS3035RES1000mN3080000E4362000 (4362500 3080500) 16067019
+    ##  7 CRS3035RES1000mN2980000E4476000 (4476500 2980500) 09377159
+    ##  8 CRS3035RES1000mN3128000E4074000 (4074500 3128500) 05116000
+    ##  9 CRS3035RES1000mN2986000E4067000 (4067500 2986500) 07232079
+    ## 10 CRS3035RES1000mN3253000E4301000 (4301500 3253500) 03241001
     ## # ℹ 2,980 more rows
 
 The resulting object is a shuffled `sf` dataset in which every synthetic

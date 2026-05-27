@@ -7,7 +7,9 @@ editor_options:
 # geosynth: Synthetic Coordinates for German Survey Data <img src="man/figures/logo.png" align="right" height="139"/>
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![R-CMD-check.yaml](https://github.com/StefanJuenger/geosynth/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/StefanJuenger/geosynth/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-red.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2025--05--27-yellowgreen.svg)](/commits/master)
 <!-- badges: end -->
 
 This `R` package provides tools to create low-threshold synthetic versions of the geographic structure of German georeferenced survey data that mimic the spatial component of the original dataset without exposing confidential coordinates or survey locations. It is designed to support spatial linking workflows--such as joining survey data with contextual geographic information--by ensuring that synthetic data closely resembles the original data in its distributional and structural properties. These data enable testing, prototyping, and methodological development without accessing restricted location data.
@@ -74,7 +76,7 @@ We use `geosynth::create_sample_frame()` to define which municipalities to inclu
 sample_frame <- 
   geosynth::create_sample_frame(
     .data = fake_survey_coordinates,
-    year = "2022",
+    year = "2024",
     geo_unit = "regiostar17",
     inhabitants_threshold = 10000,
     minimum_sample_points = 10
@@ -90,8 +92,7 @@ The resulting `sample_frame` object defines the set of municipalities eligible f
 Next, we draw a population-weighted sample of INSPIRE grid cells from the sample frame using `geosynth::draw_sample()`. The function uses built-in census data to assign each grid cell a sampling weight proportional to its resident population, so that densely populated cells are more likely to receive a synthetic point. The result is an `sf` object with synthetic point coordinates placed within the eligible grid cells.
 
 ```{r}
-synthetic_sample <-
-  geosynth::draw_sample(sample_frame = sample_frame)
+synthetic_sample <- geosynth::draw_sample(sample_frame = sample_frame)
 
 synthetic_sample
 ```
@@ -105,8 +106,8 @@ If the researcher also has access to the original geocoordinates and wants to ad
 ```{r}
 synthetic_shuffled <-
   geosynth::shuffle_min_distance(
-    original_data = fake_survey_coordinates,
     synthetic_data = synthetic_sample,
+    original_data = fake_survey_coordinates,
     min_km = 5   # kilometers
   )
 

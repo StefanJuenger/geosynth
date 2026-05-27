@@ -87,7 +87,7 @@ create_municipalities_inhabitants <- function() {
       } else {
         regiostar_data <-
           readxl::read_excel(
-            "./data-raw/2024 RegioStaR-Referenzdateien_Mobilthek.xlsx",
+            "./data-raw/2024_RegioStaR-Referenzdateien_Mobilthek.xlsx",
             sheet = glue::glue("ReferenzGebietsstand{year}")
           ) |>
           dplyr::rename_with(stringr::str_to_lower)

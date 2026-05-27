@@ -97,7 +97,7 @@ test_that("shuffle_min_distance() changes the row order relative to the input", 
   result <- shuffle_min_distance(
     original_data  = fake_survey_coordinates,
     synthetic_data = synthetic_sample,
-    min_km         = 5
+    min_km         = 100
   )
   # The shuffled coordinates should not be identical to the input
   expect_false(identical(

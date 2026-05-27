@@ -110,7 +110,7 @@ test_that("shuffle_min_distance() does not introduce new coordinate values", {
   result <- shuffle_min_distance(
     original_data  = fake_survey_coordinates,
     synthetic_data = synthetic_sample,
-    min_km         = 5
+    min_km         = 100
   )
   # All coordinates in the result must have existed in the synthetic input
   coords_result <- sf::st_coordinates(result)
@@ -127,7 +127,7 @@ test_that("shuffle_min_distance() errors on mismatched row counts", {
     shuffle_min_distance(
       original_data  = fake_survey_coordinates[1:5, ],
       synthetic_data = synthetic_sample,  # different nrow
-      min_km         = 5
+      min_km         = 100
     )
   )
 })
@@ -137,7 +137,7 @@ test_that("shuffle_min_distance() errors on non-sf original_data", {
     shuffle_min_distance(
       original_data  = as.data.frame(fake_survey_coordinates),
       synthetic_data = synthetic_sample,
-      min_km         = 5
+      min_km         = 100
     )
   )
 })
@@ -147,7 +147,7 @@ test_that("shuffle_min_distance() errors on non-sf synthetic_data", {
     shuffle_min_distance(
       original_data  = fake_survey_coordinates,
       synthetic_data = as.data.frame(synthetic_sample),
-      min_km         = 5
+      min_km         = 100
     )
   )
 })

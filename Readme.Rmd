@@ -7,11 +7,12 @@ editor_options:
 # geosynth: Synthetic Coordinates for German Survey Data <img src="man/figures/logo.png" align="right" height="139"/>
 <!-- badges: start -->
 [![Project Status: Active – The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![R-CMD-check.yaml](https://github.com/StefanJuenger/geosynth/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/StefanJuenger/geosynth/actions/workflows/R-CMD-check.yaml)
 [![Codecov test coverage](https://codecov.io/gh/StefanJuenger/geosynth/graph/badge.svg)](https://app.codecov.io/gh/StefanJuenger/geosynth)
+![main](https://img.shields.io/github/last-commit/badges/shields/main)
 [![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://choosealicense.com/licenses/mit/)
-[![Lifecycle: stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2025--05--27-brightgreen.svg)](/commits/master)
+<!-- [![Last-changedate](https://img.shields.io/badge/last%20change-2025--05--27-brightgreen.svg)](/commits/master) -->
 <!-- badges: end -->
 
 This `R` package provides tools to create low-threshold synthetic versions of the geographic structure of German georeferenced survey data that mimic the spatial component of the original dataset without exposing confidential coordinates or survey locations. It is designed to support spatial linking workflows--such as joining survey data with contextual geographic information--by ensuring that synthetic data closely resembles the original data in its distributional and structural properties. These data enable testing, prototyping, and methodological development without accessing restricted location data.

@@ -10,7 +10,19 @@ A data frame/simple feature collection with 361,478 rows and 13 columns:
   \item{inspid1km}{INSPIRE 1 sqkm identifier}
   \item{inhabitants}{Inhabitants count}
   \item{geometry}{Point geometry column (\code{EPSG:3035})}
-  \item{ags_YEAR}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
+  \item{ags_2012}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
+  \item{ags_2013}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
+  \item{ags_2014}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
+  \item{ags_2015}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
+  \item{ags_2016}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
+  \item{ags_2017}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
+  \item{ags_2018}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
+  \item{ags_2019}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
+  \item{ags_2020}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
+  \item{ags_2021}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
+  \item{ags_2022}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
+  \item{ags_2023}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
+  \item{ags_2024}{German municipality identifier for the corresponding year ("Allgemeiner Gemeindeschlüssel")}
 }
 }
 \source{

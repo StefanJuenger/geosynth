@@ -41,8 +41,8 @@ What synthetic data deliberately do *not* provide is any valid inference about a
 You can install the development version of `geosynth` from GitHub like so:
 
 ```{r eval=FALSE}
-# install.packages("remotes")
-remotes::install_github("StefanJuenger/geosynth")
+# install.packages("pak")
+pak::pkg_install("StefanJuenger/geosynth")
 ```
 
 ## In a nutshell
@@ -58,6 +58,12 @@ At the heart of the package are three functions:
 This example demonstrates how to use the `geosynth` package to generate a synthetic geospatial sample frame, draw a population-weighted sample of grid cells, and ensure the synthetic coordinates maintain a minimum distance from the original data points. We'll use the internal dataset `fake_survey_coordinates` provided by the package.
 
 ### Load package and data
+
+```{r include = FALSE}
+library(sf)
+library(tibble)
+```
+
 
 ```{r}
 library(geosynth)

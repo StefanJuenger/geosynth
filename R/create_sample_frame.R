@@ -13,6 +13,9 @@
 #' @param minimum_sample_points The minimum required sample points per geographic unit (default: 10).
 #' @return A tibble with municipality-level sample information.
 #'
+#' @importFrom stats aggregate
+#' @importFrom stats ave
+#'
 #' @export
 #'
 #' @examples
@@ -43,7 +46,7 @@ create_sample_frame <- function(
   # Load municipality shapefile and subset to required columns
   keep_cols <- c("ags", "lan", geo_unit, "inhabitants")
 
-  municipality_shape <- geosynth:::load_mun_shape(year)
+  municipality_shape <- load_mun_shape(year)
   municipality_shape <- municipality_shape[, keep_cols]
 
   # Drop geometry and join with municipality data

@@ -11,7 +11,6 @@ sample_frame <- create_sample_frame(
   minimum_sample_points = 10
 )
 
-set.seed(42)
 synthetic_sample <- draw_sample(sample_frame = sample_frame)
 
 # ── Output structure ───────────────────────────────────────────────────────────

@@ -3,3 +3,5 @@
 export(create_sample_frame)
 export(draw_sample)
 export(shuffle_min_distance)
+importFrom(stats,aggregate)
+importFrom(stats,ave)

@@ -12,6 +12,7 @@
 #'   and corresponding synthetic points. Default is 50.
 #' @param max_tries Maximum number of attempts to achieve the minimum distance
 #'   condition. Default is 10,000.
+#' @param verbose Show output from function (default TRUE)
 #'
 #' @return An `sf` object where the synthetic data has been shuffled such that
 #'   all points are at least `min_km` apart from the original data.
@@ -39,7 +40,24 @@
 #'     min_km = 5   # kilometers
 #'   )
 shuffle_min_distance <-
-  function(synthetic_data, original_data, min_km = 50, max_tries = 10000) {
+  function(
+    synthetic_data,
+    original_data,
+    min_km = 50,
+    max_tries = 1000,
+    verbose = TRUE
+    ) {
+
+    if (isTRUE(verbose)) {
+      cli::cli_h1("Shuffling synthetic data")
+
+      cli::cli_bullets(c(
+        "*" = "Observations synthetic data: {nrow(synthetic_data)}",
+        "*" = "Observations original data: {nrow(original_data)}",
+        "*" = "Min distance: {min_km} km",
+        "*" = "Max tries: {max_tries}"
+      ))
+    }
 
     if (min_km < 0) {
       stop("Negative mininum distance detected. Choose a positive one.")
@@ -50,35 +68,57 @@ shuffle_min_distance <-
         sf::st_transform(original_data, sf::st_crs(synthetic_data))
     }
 
+    if (isTRUE(verbose) &&
+        sf::st_crs(synthetic_data) != sf::st_crs(original_data)) {
+
+      cli::cli_alert_info(
+        "Transformed CRS of original data to match synthetic data"
+        )
+    }
+
     n <- nrow(original_data)
     current_synthetic <- synthetic_data
 
+    if (isTRUE(verbose)) {
+      pb <- cli::cli_progress_bar(
+        name = "Optimizing spatial distances",
+        total = max_tries
+      )
+    }
+
     for (i in 1:max_tries) {
-      # Compute pairwise distances between original and synthetic (by element)
+
       distances <-
         sf::st_distance(original_data, current_synthetic, by_element = TRUE)
 
-      # Convert distance units to kilometers
       distances_km <- as.numeric(distances) / 1000
 
-      # Identify indices where distance is below the minimum threshold
       too_close_idx <- which(distances_km < min_km)
 
-      # If all distances are acceptable, return the synthetic data
       if (length(too_close_idx) == 0) {
-        message(paste("Success after", i, "tries!"))
+
+        if (isTRUE(verbose)) {
+          cli::cli_progress_done(id = pb)
+          cli::cli_alert_success("Success after {i} tries")
+        }
+
         return(current_synthetic)
       }
 
-      # Replace problematic synthetic points with randomly selected ones
       replacement_indices <- sample(1:n, length(too_close_idx), replace = FALSE)
 
       current_synthetic[too_close_idx, ] <-
         synthetic_data[replacement_indices, ]
 
-      current_synthetic[too_close_idx, ]
+      if (isTRUE(verbose)) {
+        cli::cli_progress_update(id = pb, set = i)
+      }
     }
 
-    # If condition not satisfied within max_tries, throw an error
-    stop("Could not satisfy minimum distance after max_tries")
+    if (isTRUE(verbose)) {
+      cli::cli_progress_done(id = pb)
+      cli::cli_alert_error(
+        "Could not satisfy minimum distance after {max_tries} tries"
+      )
+    }
   }

@@ -8,7 +8,8 @@ shuffle_min_distance(
   synthetic_data,
   original_data,
   min_km = 50,
-  max_tries = 10000
+  max_tries = 1000,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -21,6 +22,8 @@ and corresponding synthetic points. Default is 50.}
 
 \item{max_tries}{Maximum number of attempts to achieve the minimum distance
 condition. Default is 10,000.}
+
+\item{verbose}{Show output from function (default TRUE)}
 }
 \value{
 An `sf` object where the synthetic data has been shuffled such that

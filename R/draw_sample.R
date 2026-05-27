@@ -5,6 +5,7 @@
 #'
 #' @param sample_frame A custom sample frame, if provided, overrides the default.
 #' @param randomize Logical. If TRUE (default), shuffles the final sample.
+#' @param verbose Show output from function (default TRUE)
 #'
 #' @return A tibble with selected INSPIRE grid cell identifiers.
 #'
@@ -27,7 +28,17 @@
 #' synthetic_sample <- geosynth::draw_sample(sample_frame = sample_frame)
 #'
 #' @export
-draw_sample <- function(sample_frame = NULL, randomize = TRUE) {
+draw_sample <- function(sample_frame = NULL, randomize = TRUE, verbose = TRUE) {
+  if (isTRUE(verbose)) {
+    cli::cli_h1("Drawing sample")
+
+    cli::cli_bullets(c(
+      "*" = "Year: {sample_frame$year[1]}",
+      "*" = "Municipalities in sample frame: {nrow(sample_frame)}",
+      "*" = "Randomization: {randomize}"
+    ))
+  }
+
   # Define AGS column name for census lookup
   year_ags <- paste0("ags_", sample_frame$year[1])
 
@@ -77,6 +88,12 @@ draw_sample <- function(sample_frame = NULL, randomize = TRUE) {
   sample_municipalities <-
     sample_municipalities[sample_municipalities$ags %in% census_ags, ]
 
+  if (isTRUE(verbose)) {
+    cli::cli_alert_success(
+      "{nrow(sample_municipalities)} municipalities selected for sampling"
+    )
+  }
+
   # ---- Step 2: Adjust Census Data for Sampling ----
   grp_key <- census_inhabitants[[year_ags]]
 
@@ -92,30 +109,49 @@ draw_sample <- function(sample_frame = NULL, randomize = TRUE) {
   # ---- Step 3: Draw INSPIRE Grid Cells ----
   n_final <- round(mean(sample_frame$n, na.rm = TRUE))
 
-  drawn_sample <-
-    lapply(seq_len(nrow(sample_municipalities)), function(i) {
-      row_i <- sample_municipalities[i, ]
+  if (isTRUE(verbose)) {
+    pb <- cli::cli_progress_bar(
+      name = "Drawing coordinates",
+      total = nrow(sample_municipalities)
+    )
+  }
 
-      eligible <- census_inhabitants[
-        census_inhabitants[[year_ags]] == row_i$ags &
-          census_inhabitants$inhabitants >= 3,
-        c("inspid1km", "inhabitants")
-      ]
+  drawn_list <- vector("list", nrow(sample_municipalities))
 
-      idx <- sample(
-        nrow(eligible),
-        size = row_i$n_resp_realize,
-        prob = eligible$inhabitants,
-        replace = TRUE
-      )
+  for (i in seq_len(nrow(sample_municipalities))) {
 
-      result <- eligible[idx, "inspid1km"]
-      result$ags <- row_i$ags
-      result
-    }) |>
-    do.call(what = rbind, args = _)
+    row_i <- sample_municipalities[i, ]
+
+    eligible <- census_inhabitants[
+      census_inhabitants[[year_ags]] == row_i$ags &
+        census_inhabitants$inhabitants >= 3,
+      c("inspid1km", "inhabitants")
+    ]
+
+    idx <- sample(
+      nrow(eligible),
+      size = row_i$n_resp_realize,
+      prob = eligible$inhabitants,
+      replace = TRUE
+    )
+
+    result <- eligible[idx, "inspid1km"]
+    result$ags <- row_i$ags
+
+    drawn_list[[i]] <- result
+
+    if (isTRUE(verbose)) {
+      cli::cli_progress_update(id = pb, set = i)
+    }
+  }
+
+  drawn_sample <- do.call(rbind, drawn_list)
 
   drawn_sample <- drawn_sample[sample(nrow(drawn_sample), n_final), ]
+
+  if (isTRUE(verbose)) {
+    cli::cli_progress_done(id = pb)
+  }
 
   # Exclude municipalities flagged in the sample frame
   evil_municipalities <-
@@ -124,9 +160,21 @@ draw_sample <- function(sample_frame = NULL, randomize = TRUE) {
   drawn_sample <-
     drawn_sample[!(drawn_sample$ags %in% evil_municipalities), ]
 
+  if (isTRUE(verbose)) {
+    cli::cli_alert_success(
+      "Sample of {nrow(drawn_sample)} coordinates drawn"
+    )
+  }
+
   # Randomize the sample if required
   if (isTRUE(randomize)) {
     drawn_sample <- drawn_sample[sample(nrow(drawn_sample)), ]
+  }
+
+  if (isTRUE(verbose)) {
+    cli::cli_alert_success(
+      "Finished drawing sample"
+    )
   }
 
   drawn_sample

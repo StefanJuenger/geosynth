@@ -4,12 +4,14 @@
 \alias{draw_sample}
 \title{Draw a Sample Based on a Defined Sample Frame}
 \usage{
-draw_sample(sample_frame = NULL, randomize = TRUE)
+draw_sample(sample_frame = NULL, randomize = TRUE, verbose = TRUE)
 }
 \arguments{
 \item{sample_frame}{A custom sample frame, if provided, overrides the default.}
 
 \item{randomize}{Logical. If TRUE (default), shuffles the final sample.}
+
+\item{verbose}{Show output from function (default TRUE)}
 }
 \value{
 A tibble with selected INSPIRE grid cell identifiers.

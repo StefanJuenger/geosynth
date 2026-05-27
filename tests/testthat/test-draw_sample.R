@@ -33,6 +33,13 @@ test_that("draw_sample() returns a valid CRS", {
   expect_false(is.na(sf::st_crs(drawn_sample)))
 })
 
+# ── Message behaviour ───────────────────────────────────────────────────────
+test_that("create_sample_frame(..., verbose = FALSE) is silent", {
+  expect_no_message(
+    draw_sample(sample_frame = sample_frame, verbose = FALSE)
+  )
+})
+
 # ── Safety measures ───────────────────────────────────────────────────────────
 
 test_that("draw_sample() does not pick flagged municipalities", {

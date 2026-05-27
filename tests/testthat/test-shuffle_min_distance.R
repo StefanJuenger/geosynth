@@ -51,6 +51,18 @@ test_that("shuffle_min_distance() preserves the CRS of the synthetic input", {
   expect_equal(sf::st_crs(result), sf::st_crs(synthetic_sample))
 })
 
+# ── Message behaviour ───────────────────────────────────────────────────────
+test_that("create_sample_frame(..., verbose = FALSE) is silent", {
+  expect_no_message(
+    shuffle_min_distance(
+      original_data  = fake_survey_coordinates,
+      synthetic_data = synthetic_sample,
+      min_km         = 5,
+      verbose = FALSE
+    )
+  )
+})
+
 # ── Distance guarantee ─────────────────────────────────────────────────────────
 
 test_that("shuffle_min_distance() enforces the minimum distance for all point pairs", {

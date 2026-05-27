@@ -9,7 +9,8 @@ create_sample_frame(
   year,
   geo_unit = c("gkpol", "regiostar7", "regiostar17"),
   inhabitants_threshold = 50000,
-  minimum_sample_points = 10
+  minimum_sample_points = 10,
+  verbose = TRUE
 )
 }
 \arguments{
@@ -23,6 +24,8 @@ defaulting to `c("gkpol", "regiostar7", "regiostar17")`.}
 \item{inhabitants_threshold}{The minimum population required for inclusion (default: 50,000).}
 
 \item{minimum_sample_points}{The minimum required sample points per geographic unit (default: 10).}
+
+\item{verbose}{Show output from function (default TRUE)}
 }
 \value{
 A tibble with municipality-level sample information.

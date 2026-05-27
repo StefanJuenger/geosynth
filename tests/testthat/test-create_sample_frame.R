@@ -44,6 +44,18 @@ test_that("create_sample_frame() sets the year column correctly", {
   expect_true(all(result$year == "2022"))
 })
 
+# ── Message behaviour ───────────────────────────────────────────────────────
+test_that("create_sample_frame(..., verbose = FALSE) is silent", {
+  expect_no_message(
+    create_sample_frame(
+      .data    = fake_survey_coordinates,
+      year     = "2022",
+      geo_unit = "regiostar17",
+      verbose = FALSE
+    )
+  )
+})
+
 # ── Filtering behaviour ────────────────────────────────────────────────────────
 
 test_that("create_sample_frame() excludes municipalities below inhabitants_threshold", {

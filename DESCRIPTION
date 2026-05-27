@@ -17,8 +17,9 @@ Imports:
     tibble
 Suggests:
     testthat (>= 3.0.0),
-    covr
+    covr,
+    dplyr
 RoxygenNote: 7.3.3
 Depends: 
-    R (>= 3.5)
+    R (>= 4.2.0)
 Config/testthat/edition: 3

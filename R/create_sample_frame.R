@@ -162,6 +162,8 @@ create_sample_frame <- function(
   )
 
   result <- result[order(result$lan), ]
+
   result$year <- year
-  result
+
+  tibble::as_tibble(result)
 }

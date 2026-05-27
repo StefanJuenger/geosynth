@@ -13,9 +13,9 @@ License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    sf
+    sf,
+    tibble
 RoxygenNote: 7.3.3
 Depends: 
     R (>= 3.5)
-Suggests: 
 Config/testthat/edition: 3

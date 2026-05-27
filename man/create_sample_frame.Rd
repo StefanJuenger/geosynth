@@ -34,10 +34,18 @@ municipal information, aggregates data at various geographic levels, and ensures
 requirements are met before merging the results into a final frame.
 }
 \examples{
-# Sample data for the year 2022 with a population threshold of 100,000
-sampled_data <- function(data, year = 2022, inhabitants_threshold = 100000)
+# Sample data for the year 2024 with a population threshold of 100,000
+library(geosynth)
 
-# Sample data using the "RegioStaR17" geographic unit
-sampled_data <- function(data, year = 2022, geo_unit = "RegioStaR17")
+data("fake_survey_coordinates")
+
+sample_frame <-
+ geosynth::create_sample_frame(
+   .data = fake_survey_coordinates,
+   year = "2024",
+   geo_unit = "regiostar17",
+   inhabitants_threshold = 10000,
+   minimum_sample_points = 10
+ )
 
 }

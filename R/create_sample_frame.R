@@ -13,6 +13,8 @@
 #' @param minimum_sample_points The minimum required sample points per geographic unit (default: 10).
 #' @return A tibble with municipality-level sample information.
 #'
+#' @export
+#'
 #' @examples
 #' # Sample data for the year 2024 with a population threshold of 100,000
 #' library(geosynth)

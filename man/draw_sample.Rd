@@ -18,3 +18,20 @@ A tibble with selected INSPIRE grid cell identifiers.
 This function selects a sample of INSPIRE grid cells from a pre-defined sample frame,
 considering population data for weighting. It supports randomization.
 }
+\examples{
+library(geosynth)
+
+data("fake_survey_coordinates")
+
+sample_frame <-
+ geosynth::create_sample_frame(
+   .data = fake_survey_coordinates,
+   year = "2024",
+   geo_unit = "regiostar17",
+   inhabitants_threshold = 10000,
+   minimum_sample_points = 10
+ )
+
+synthetic_sample <- geosynth::draw_sample(sample_frame = sample_frame)
+
+}

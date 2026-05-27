@@ -15,7 +15,7 @@
 #'
 #' @return An `sf` object where the synthetic data has been shuffled such that
 #'   all points are at least `min_km` apart from the original data.
-#'
+#' @export
 #' @examples
 #' library(geosynth)
 #'
@@ -38,8 +38,6 @@
 #'     original_data = fake_survey_coordinates,
 #'     min_km = 5   # kilometers
 #'   )
-#'
-#' @export
 shuffle_min_distance <-
   function(synthetic_data, original_data, min_km = 50, max_tries = 10000) {
 

@@ -8,7 +8,9 @@
 #'
 #' @return A tibble with selected INSPIRE grid cell identifiers.
 #'
-#' #' @examples
+#' @export
+#'
+#' @examples
 #' library(geosynth)
 #'
 #' data("fake_survey_coordinates")

@@ -7,6 +7,23 @@
 #' @param randomize Logical. If TRUE (default), shuffles the final sample.
 #'
 #' @return A tibble with selected INSPIRE grid cell identifiers.
+#'
+#' #' @examples
+#' library(geosynth)
+#'
+#' data("fake_survey_coordinates")
+#'
+#' sample_frame <-
+#'  geosynth::create_sample_frame(
+#'    .data = fake_survey_coordinates,
+#'    year = "2024",
+#'    geo_unit = "regiostar17",
+#'    inhabitants_threshold = 10000,
+#'    minimum_sample_points = 10
+#'  )
+#'
+#' synthetic_sample <- geosynth::draw_sample(sample_frame = sample_frame)
+#'
 #' @export
 draw_sample <- function(sample_frame = NULL, randomize = TRUE) {
   # Define AGS column name for census lookup

@@ -17,8 +17,27 @@
 #'   all points are at least `min_km` apart from the original data.
 #'
 #' @examples
-#' # Assuming `orig` and `synth` are sf POINT objects with equal rows:
-#' # shuffled <- shuffle_min_distance(orig, synth, min_km = 50)
+#' library(geosynth)
+#'
+#' data("fake_survey_coordinates")
+#'
+#' sample_frame <-
+#'  geosynth::create_sample_frame(
+#'    .data = fake_survey_coordinates,
+#'    year = "2024",
+#'    geo_unit = "regiostar17",
+#'    inhabitants_threshold = 10000,
+#'    minimum_sample_points = 10
+#'  )
+#'
+#' synthetic_sample <- geosynth::draw_sample(sample_frame = sample_frame)
+#'
+#' synthetic_shuffled <-
+#'   geosynth::shuffle_min_distance(
+#'     synthetic_data = synthetic_sample,
+#'     original_data = fake_survey_coordinates,
+#'     min_km = 5   # kilometers
+#'   )
 #'
 #' @export
 shuffle_min_distance <-

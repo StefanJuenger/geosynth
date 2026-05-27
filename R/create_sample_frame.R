@@ -61,7 +61,7 @@ create_sample_frame <- function(
   # Load municipality shapefile and subset to required columns
   keep_cols <- c("ags", "lan", geo_unit, "inhabitants")
 
-  municipality_shape <- geosynth:::load_mun_shape(year)
+  municipality_shape <- load_mun_shape(year)
   municipality_shape <- municipality_shape[, keep_cols]
 
   if (isTRUE(verbose)) {

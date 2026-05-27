@@ -4,15 +4,12 @@
 \alias{draw_sample}
 \title{Draw a Sample Based on a Defined Sample Frame}
 \usage{
-draw_sample(sample_frame = NULL, year = NULL, randomize = TRUE)
+draw_sample(sample_frame = NULL, randomize = TRUE)
 }
 \arguments{
 \item{sample_frame}{A custom sample frame, if provided, overrides the default.}
 
 \item{randomize}{Logical. If TRUE (default), shuffles the final sample.}
-
-\item{custom_year}{A custom year for retrieving municipality and census data. If NULL,
-the function extracts the year from `survey`.}
 }
 \value{
 A tibble with selected INSPIRE grid cell identifiers.

@@ -7,7 +7,7 @@
 create_sample_frame(
   .data,
   year,
-  geo_unit = c("gkpol", "RegioStaR7", "RegioStaR17"),
+  geo_unit = c("gkpol", "regiostar7", "regiostar17"),
   inhabitants_threshold = 50000,
   minimum_sample_points = 10
 )
@@ -18,7 +18,7 @@ create_sample_frame(
 \item{year}{The year for which the sample frame is created (used to fetch municipality data).}
 
 \item{geo_unit}{A character vector specifying the geographic unit to be used,
-defaulting to `c("gkpol", "RegioStaR7", "RegioStaR17")`.}
+defaulting to `c("gkpol", "regiostar7", "regiostar17")`.}
 
 \item{inhabitants_threshold}{The minimum population required for inclusion (default: 50,000).}
 

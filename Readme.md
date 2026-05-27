@@ -6,12 +6,13 @@
 [![Project Status: Active – The project has reached a stable, usable
 state and is being actively
 developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![R-CMD-check.yaml](https://github.com/StefanJuenger/geosynth/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/StefanJuenger/geosynth/actions/workflows/R-CMD-check.yaml)
 [![Codecov test
 coverage](https://codecov.io/gh/StefanJuenger/geosynth/graph/badge.svg)](https://app.codecov.io/gh/StefanJuenger/geosynth)
-[![R-CMD-check.yaml](https://github.com/StefanJuenger/geosynth/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/StefanJuenger/geosynth/actions/workflows/R-CMD-check.yaml)
+[![license](https://img.shields.io/github/license/mashape/apistatus.svg)](https://choosealicense.com/licenses/mit/)
 [![Lifecycle:
-stable](https://img.shields.io/badge/lifecycle-stable-yellow.svg)](https://www.tidyverse.org/lifecycle/#stable)
-[![Last-changedate](https://img.shields.io/badge/last%20change-2025--05--27-yellowgreen.svg)](/commits/master)
+stable](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://www.tidyverse.org/lifecycle/#stable)
+[![Last-changedate](https://img.shields.io/badge/last%20change-2025--05--27-brightgreen.svg)](/commits/master)
 <!-- badges: end -->
 
 This `R` package provides tools to create low-threshold synthetic
@@ -199,7 +200,31 @@ sample_frame <-
     inhabitants_threshold = 10000,
     minimum_sample_points = 10
   )
+```
 
+    ## 
+
+    ## ── Creating sample frame ───────────────────────────────────────────────────────
+
+    ## • Number of observations: 2990
+
+    ## • Year: 2024
+
+    ## • Geo unit: regiostar17
+
+    ## • Inhabitants threshold: 10000
+
+    ## • Minimum sample points: 10
+
+    ## ✔ Loaded 2024 municipality geometry with 10956 rows
+
+    ## ✔ Processed and analyzed in combination with input data
+
+    ## ! 4 units below safety thresholds (will be flagged)
+
+    ## ✔ Finished sample frame
+
+``` r
 sample_frame
 ```
 
@@ -239,28 +264,45 @@ cells.
 
 ``` r
 synthetic_sample <- geosynth::draw_sample(sample_frame = sample_frame)
+```
 
+    ## 
+
+    ## ── Drawing sample ──────────────────────────────────────────────────────────────
+
+    ## • Year: 2024
+
+    ## • Municipalities in sample frame: 10956
+
+    ## • Randomization: TRUE
+
+    ## ✔ 1534 municipalities selected for sampling
+
+    ## Drawing coordinates ■■■■                              10% | ETA:  9sDrawing coordinates ■■■■                              11% | ETA: 10sDrawing coordinates ■■■■■                             13% | ETA: 10sDrawing coordinates ■■■■■                             14% | ETA: 10sDrawing coordinates ■■■■■■                            16% | ETA: 10sDrawing coordinates ■■■■■■                            17% | ETA: 10sDrawing coordinates ■■■■■■■                           19% | ETA: 10sDrawing coordinates ■■■■■■■                           20% | ETA: 10sDrawing coordinates ■■■■■■■                           21% | ETA: 10sDrawing coordinates ■■■■■■■■                          23% | ETA: 10sDrawing coordinates ■■■■■■■■                          24% | ETA: 10sDrawing coordinates ■■■■■■■■■                         26% | ETA:  9sDrawing coordinates ■■■■■■■■■                         27% | ETA:  9sDrawing coordinates ■■■■■■■■■■                        28% | ETA:  9sDrawing coordinates ■■■■■■■■■■                        29% | ETA: 10sDrawing coordinates ■■■■■■■■■■                        30% | ETA: 10sDrawing coordinates ■■■■■■■■■■                        31% | ETA:  9sDrawing coordinates ■■■■■■■■■■■                       33% | ETA:  9sDrawing coordinates ■■■■■■■■■■■                       34% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■                      36% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■                      37% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■                     39% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■                     40% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■                     41% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■                     41% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■                    42% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■                    42% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■                    43% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■                    44% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■                    44% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■                    45% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■■                   45% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■■                   46% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■■                   47% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■■                   48% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■■■                  49% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■■■                  49% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■■■                  50% | ETA:  9sDrawing coordinates ■■■■■■■■■■■■■■■■                  51% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■                 52% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■                 52% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■                 53% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■                 53% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■                 54% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■                55% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■                56% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■                57% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■                57% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■                57% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■                58% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■■               59% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■■               60% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■■               60% | ETA:  8sDrawing coordinates ■■■■■■■■■■■■■■■■■■■               61% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■              62% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■              63% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■              64% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■              65% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■             65% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■             66% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■             67% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■             67% | ETA:  7sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■             68% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■            69% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■            70% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■            71% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■            72% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■           72% | ETA:  6sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■           74% | ETA:  5sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■           75% | ETA:  5sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■          75% | ETA:  5sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■          76% | ETA:  5sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■          77% | ETA:  5sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■          78% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■         79% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■         80% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■         81% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■         81% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■        82% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■        82% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■        83% | ETA:  4sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■        84% | ETA:  3sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■        84% | ETA:  3sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■        85% | ETA:  3sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■       86% | ETA:  3sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■       86% | ETA:  3sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■       87% | ETA:  3sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      88% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      89% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      90% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      91% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      92% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     93% | ETA:  2sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     94% | ETA:  1sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     95% | ETA:  1sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    96% | ETA:  1sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    96% | ETA:  1sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    97% | ETA:  1sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    98% | ETA:  0sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    98% | ETA:  0sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   99% | ETA:  0sDrawing coordinates ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% | ETA:  0s                                                                     ✔ Sample of 2990 coordinates drawn
+    ## ✔ Finished drawing sample
+
+``` r
 synthetic_sample
 ```
 
     ## Simple feature collection with 2990 features and 2 fields
     ## Geometry type: POINT
     ## Dimension:     XY
-    ## Bounding box:  xmin: 4043500 ymin: 2699500 xmax: 4669500 ymax: 3537500
+    ## Bounding box:  xmin: 4043500 ymin: 2699500 xmax: 4666500 ymax: 3540500
     ## Projected CRS: ETRS89-extended / LAEA Europe
     ## # A tibble: 2,990 × 3
     ##    inspid1km                                geometry ags     
     ##    <chr>                                 <POINT [m]> <chr>   
-    ##  1 CRS3035RES1000mN3104000E4437000 (4437500 3104500) 16071004
-    ##  2 CRS3035RES1000mN3168000E4128000 (4128500 3168500) 05562032
-    ##  3 CRS3035RES1000mN2985000E4413000 (4413500 2985500) 09477164
-    ##  4 CRS3035RES1000mN2730000E4259000 (4259500 2730500) 08335043
-    ##  5 CRS3035RES1000mN2795000E4394000 (4394500 2795500) 09771146
-    ##  6 CRS3035RES1000mN2832000E4182000 (4182500 2832500) 08317056
-    ##  7 CRS3035RES1000mN3100000E4592000 (4592500 3100500) 14628080
-    ##  8 CRS3035RES1000mN2782000E4428000 (4428500 2782500) 09162000
-    ##  9 CRS3035RES1000mN3393000E4528000 (4528500 3393500) 13071016
-    ## 10 CRS3035RES1000mN3392000E4409000 (4409500 3392500) 13076154
+    ##  1 CRS3035RES1000mN3179000E4079000 (4079500 3179500) 05170048
+    ##  2 CRS3035RES1000mN2991000E4194000 (4194500 2991500) 07315000
+    ##  3 CRS3035RES1000mN3029000E4149000 (4149500 3029500) 07111000
+    ##  4 CRS3035RES1000mN3096000E4053000 (4053500 3096500) 05334008
+    ##  5 CRS3035RES1000mN2923000E4407000 (4407500 2923500) 09564000
+    ##  6 CRS3035RES1000mN3273000E4141000 (4141500 3273500) 03454032
+    ##  7 CRS3035RES1000mN3031000E4285000 (4285500 3031500) 06435025
+    ##  8 CRS3035RES1000mN3059000E4481000 (4481500 3059500) 14523340
+    ##  9 CRS3035RES1000mN2877000E4205000 (4205500 2877500) 08212000
+    ## 10 CRS3035RES1000mN3121000E4514000 (4514500 3121500) 14729080
     ## # ℹ 2,980 more rows
 
 At this stage, `synthetic_sample` already provides a realistic spatial
@@ -286,11 +328,23 @@ synthetic_shuffled <-
   geosynth::shuffle_min_distance(
     synthetic_data = synthetic_sample,
     original_data = fake_survey_coordinates,
-    min_km = 5   # kilometers
+    min_km = 50
   )
 ```
 
-    ## Success after 2 tries!
+    ## 
+
+    ## ── Shuffling synthetic data ────────────────────────────────────────────────────
+
+    ## • Observations synthetic data: 2990
+
+    ## • Observations original data: 2990
+
+    ## • Min distance: 50 km
+
+    ## • Max tries: 1000
+
+    ## ✔ Success after 4 tries
 
 ``` r
 synthetic_shuffled
@@ -299,21 +353,21 @@ synthetic_shuffled
     ## Simple feature collection with 2990 features and 2 fields
     ## Geometry type: POINT
     ## Dimension:     XY
-    ## Bounding box:  xmin: 4043500 ymin: 2699500 xmax: 4669500 ymax: 3537500
+    ## Bounding box:  xmin: 4043500 ymin: 2699500 xmax: 4666500 ymax: 3540500
     ## Projected CRS: ETRS89-extended / LAEA Europe
     ## # A tibble: 2,990 × 3
     ##    inspid1km                                geometry ags     
     ##    <chr>                                 <POINT [m]> <chr>   
-    ##  1 CRS3035RES1000mN3104000E4437000 (4437500 3104500) 16071004
-    ##  2 CRS3035RES1000mN3168000E4128000 (4128500 3168500) 05562032
-    ##  3 CRS3035RES1000mN2985000E4413000 (4413500 2985500) 09477164
-    ##  4 CRS3035RES1000mN2730000E4259000 (4259500 2730500) 08335043
-    ##  5 CRS3035RES1000mN2795000E4394000 (4394500 2795500) 09771146
-    ##  6 CRS3035RES1000mN2832000E4182000 (4182500 2832500) 08317056
-    ##  7 CRS3035RES1000mN3100000E4592000 (4592500 3100500) 14628080
-    ##  8 CRS3035RES1000mN2782000E4428000 (4428500 2782500) 09162000
-    ##  9 CRS3035RES1000mN3393000E4528000 (4528500 3393500) 13071016
-    ## 10 CRS3035RES1000mN3392000E4409000 (4409500 3392500) 13076154
+    ##  1 CRS3035RES1000mN3179000E4079000 (4079500 3179500) 05170048
+    ##  2 CRS3035RES1000mN2991000E4194000 (4194500 2991500) 07315000
+    ##  3 CRS3035RES1000mN3029000E4149000 (4149500 3029500) 07111000
+    ##  4 CRS3035RES1000mN3096000E4053000 (4053500 3096500) 05334008
+    ##  5 CRS3035RES1000mN2923000E4407000 (4407500 2923500) 09564000
+    ##  6 CRS3035RES1000mN3273000E4141000 (4141500 3273500) 03454032
+    ##  7 CRS3035RES1000mN3031000E4285000 (4285500 3031500) 06435025
+    ##  8 CRS3035RES1000mN3059000E4481000 (4481500 3059500) 14523340
+    ##  9 CRS3035RES1000mN2877000E4205000 (4205500 2877500) 08212000
+    ## 10 CRS3035RES1000mN3121000E4514000 (4514500 3121500) 14729080
     ## # ℹ 2,980 more rows
 
 The resulting object is a shuffled `sf` dataset in which every synthetic

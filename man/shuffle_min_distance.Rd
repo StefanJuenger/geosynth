@@ -5,16 +5,16 @@
 \title{Shuffle Synthetic Data to Maintain Minimum Distance}
 \usage{
 shuffle_min_distance(
-  original_data,
   synthetic_data,
+  original_data,
   min_km = 50,
   max_tries = 10000
 )
 }
 \arguments{
-\item{original_data}{An `sf` object containing the original spatial data.}
-
 \item{synthetic_data}{An `sf` object with the synthetic spatial data to shuffle.}
+
+\item{original_data}{An `sf` object containing the original spatial data.}
 
 \item{min_km}{Minimum allowed distance (in kilometers) between original
 and corresponding synthetic points. Default is 50.}

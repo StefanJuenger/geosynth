@@ -6,8 +6,8 @@
 #' for problematic points until either the distance condition is satisfied
 #' or `max_tries` is reached.
 #'
-#' @param original_data An `sf` object containing the original spatial data.
 #' @param synthetic_data An `sf` object with the synthetic spatial data to shuffle.
+#' @param original_data An `sf` object containing the original spatial data.
 #' @param min_km Minimum allowed distance (in kilometers) between original
 #'   and corresponding synthetic points. Default is 50.
 #' @param max_tries Maximum number of attempts to achieve the minimum distance
@@ -22,10 +22,15 @@
 #'
 #' @export
 shuffle_min_distance <-
-  function(original_data, synthetic_data, min_km = 50, max_tries = 10000) {
+  function(synthetic_data, original_data, min_km = 50, max_tries = 10000) {
 
     if (min_km < 0) {
       stop("Negative mininum distance detected. Choose a positive one.")
+    }
+
+    if (sf::st_crs(synthetic_data) != sf::st_crs(original_data)) {
+      original_data <-
+        sf::st_transform(original_data, sf::st_crs(synthetic_data))
     }
 
     n <- nrow(original_data)
@@ -37,7 +42,7 @@ shuffle_min_distance <-
         sf::st_distance(original_data, current_synthetic, by_element = TRUE)
 
       # Convert distance units to kilometers
-      distances_km <- distances / 1000
+      distances_km <- as.numeric(distances) / 1000
 
       # Identify indices where distance is below the minimum threshold
       too_close_idx <- which(distances_km < min_km)
@@ -53,6 +58,8 @@ shuffle_min_distance <-
 
       current_synthetic[too_close_idx, ] <-
         synthetic_data[replacement_indices, ]
+
+      current_synthetic[too_close_idx, ]
     }
 
     # If condition not satisfied within max_tries, throw an error

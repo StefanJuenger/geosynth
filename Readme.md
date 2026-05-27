@@ -10,7 +10,7 @@ developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.re
 coverage](https://codecov.io/gh/StefanJuenger/geosynth/graph/badge.svg)](https://app.codecov.io/gh/StefanJuenger/geosynth)
 [![R-CMD-check.yaml](https://github.com/StefanJuenger/geosynth/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/StefanJuenger/geosynth/actions/workflows/R-CMD-check.yaml)
 [![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-red.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+stable](https://img.shields.io/badge/lifecycle-stable-yellow.svg)](https://www.tidyverse.org/lifecycle/#stable)
 [![Last-changedate](https://img.shields.io/badge/last%20change-2025--05--27-yellowgreen.svg)](/commits/master)
 <!-- badges: end -->
 
@@ -3179,15 +3179,15 @@ sample_frame
     ##    lan   geo_unit ags   regiostar17 inhabitants n_resp_geo_unit n_geo_unit     n
     ##    <chr>    <dbl> <chr>       <dbl>       <int>           <int>      <dbl> <dbl>
     ##  1 01         113 0105…         113       51342               9          5  2990
-    ##  2 01         113 0105…         113       44865               9          5  2990
+    ##  2 01         113 0106…         113       82844               9          5  2990
     ##  3 01         113 0105…         113       34912               9          5  2990
-    ##  4 01         113 0106…         113       82844               9          5  2990
-    ##  5 01         113 0105…         113       33519               9          5  2990
+    ##  4 01         113 0105…         113       33519               9          5  2990
+    ##  5 01         113 0105…         113       44865               9          5  2990
     ##  6 01         113 0106…         113       34534               9          5  2990
     ##  7 01         114 0106…         114       28274              15         12  2990
-    ##  8 01         114 0105…         114        2297              15         12  2990
-    ##  9 01         114 0106…         114        9469              15         12  2990
-    ## 10 01         114 0105…         114         796              15         12  2990
+    ##  8 01         114 0106…         114        8961              15         12  2990
+    ##  9 01         114 0105…         114        2297              15         12  2990
+    ## 10 01         114 0106…         114       24846              15         12  2990
     ## # ℹ 10,946 more rows
     ## # ℹ 1 more variable: year <chr>
 
@@ -3218,21 +3218,21 @@ synthetic_sample
     ## Simple feature collection with 2990 features and 2 fields
     ## Geometry type: POINT
     ## Dimension:     XY
-    ## Bounding box:  xmin: 4041500 ymin: 2703500 xmax: 4669500 ymax: 3523500
+    ## Bounding box:  xmin: 4042500 ymin: 2699500 xmax: 4669500 ymax: 3522500
     ## Projected CRS: ETRS89-extended / LAEA Europe
     ## # A tibble: 2,990 × 3
     ##    inspid1km                                geometry ags     
     ##    <chr>                                 <POINT [m]> <chr>   
-    ##  1 CRS3035RES1000mN2745000E4220000 (4220500 2745500) 08335080
-    ##  2 CRS3035RES1000mN2827000E4279000 (4279500 2827500) 08116018
-    ##  3 CRS3035RES1000mN3395000E4253000 (4253500 3395500) 03352052
-    ##  4 CRS3035RES1000mN3162000E4094000 (4094500 3162500) 05112000
-    ##  5 CRS3035RES1000mN2848000E4245000 (4245500 2848500) 08115029
-    ##  6 CRS3035RES1000mN3007000E4452000 (4452500 3007500) 09475174
-    ##  7 CRS3035RES1000mN2764000E4330000 (4330500 2764500) 09778123
-    ##  8 CRS3035RES1000mN3075000E4364000 (4364500 3075500) 16067065
-    ##  9 CRS3035RES1000mN3204000E4378000 (4378500 3204500) 15085230
-    ## 10 CRS3035RES1000mN3093000E4104000 (4104500 3093500) 05315000
+    ##  1 CRS3035RES1000mN3167000E4106000 (4106500 3167500) 05512000
+    ##  2 CRS3035RES1000mN2989000E4437000 (4437500 2989500) 09472119
+    ##  3 CRS3035RES1000mN3138000E4135000 (4135500 3138500) 05954012
+    ##  4 CRS3035RES1000mN2810000E4154000 (4154500 2810500) 08317150
+    ##  5 CRS3035RES1000mN2907000E4133000 (4133500 2907500) 07340206
+    ##  6 CRS3035RES1000mN3002000E4232000 (4232500 3002500) 06412000
+    ##  7 CRS3035RES1000mN2836000E4258000 (4258500 2836500) 08115048
+    ##  8 CRS3035RES1000mN3155000E4123000 (4123500 3155500) 05911000
+    ##  9 CRS3035RES1000mN2737000E4242000 (4242500 2737500) 08335063
+    ## 10 CRS3035RES1000mN3090000E4102000 (4102500 3090500) 05362028
     ## # ℹ 2,980 more rows
 
 At this stage, `synthetic_sample` already provides a realistic spatial
@@ -3271,21 +3271,21 @@ synthetic_shuffled
     ## Simple feature collection with 2990 features and 2 fields
     ## Geometry type: POINT
     ## Dimension:     XY
-    ## Bounding box:  xmin: 4041500 ymin: 2703500 xmax: 4669500 ymax: 3523500
+    ## Bounding box:  xmin: 4042500 ymin: 2699500 xmax: 4669500 ymax: 3522500
     ## Projected CRS: ETRS89-extended / LAEA Europe
     ## # A tibble: 2,990 × 3
     ##    inspid1km                                geometry ags     
     ##    <chr>                                 <POINT [m]> <chr>   
-    ##  1 CRS3035RES1000mN2745000E4220000 (4220500 2745500) 08335080
-    ##  2 CRS3035RES1000mN2827000E4279000 (4279500 2827500) 08116018
-    ##  3 CRS3035RES1000mN3395000E4253000 (4253500 3395500) 03352052
-    ##  4 CRS3035RES1000mN3162000E4094000 (4094500 3162500) 05112000
-    ##  5 CRS3035RES1000mN2848000E4245000 (4245500 2848500) 08115029
-    ##  6 CRS3035RES1000mN3007000E4452000 (4452500 3007500) 09475174
-    ##  7 CRS3035RES1000mN2764000E4330000 (4330500 2764500) 09778123
-    ##  8 CRS3035RES1000mN3075000E4364000 (4364500 3075500) 16067065
-    ##  9 CRS3035RES1000mN3204000E4378000 (4378500 3204500) 15085230
-    ## 10 CRS3035RES1000mN3093000E4104000 (4104500 3093500) 05315000
+    ##  1 CRS3035RES1000mN3167000E4106000 (4106500 3167500) 05512000
+    ##  2 CRS3035RES1000mN2989000E4437000 (4437500 2989500) 09472119
+    ##  3 CRS3035RES1000mN3138000E4135000 (4135500 3138500) 05954012
+    ##  4 CRS3035RES1000mN2810000E4154000 (4154500 2810500) 08317150
+    ##  5 CRS3035RES1000mN2907000E4133000 (4133500 2907500) 07340206
+    ##  6 CRS3035RES1000mN3002000E4232000 (4232500 3002500) 06412000
+    ##  7 CRS3035RES1000mN2836000E4258000 (4258500 2836500) 08115048
+    ##  8 CRS3035RES1000mN3155000E4123000 (4123500 3155500) 05911000
+    ##  9 CRS3035RES1000mN2737000E4242000 (4242500 2737500) 08335063
+    ## 10 CRS3035RES1000mN3090000E4102000 (4102500 3090500) 05362028
     ## # ℹ 2,980 more rows
 
 The resulting object is a shuffled `sf` dataset in which every synthetic

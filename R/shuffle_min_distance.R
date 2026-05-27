@@ -23,15 +23,21 @@
 #' @export
 shuffle_min_distance <-
   function(original_data, synthetic_data, min_km = 50, max_tries = 10000) {
+
+    if (min_km < 0) {
+      stop("Negative mininum distance detected. Choose a positive one.")
+    }
+
     n <- nrow(original_data)
     current_synthetic <- synthetic_data
 
     for (i in 1:max_tries) {
       # Compute pairwise distances between original and synthetic (by element)
-      distances <- sf::st_distance(original_data, current_synthetic, by_element = TRUE)
+      distances <-
+        sf::st_distance(original_data, current_synthetic, by_element = TRUE)
 
       # Convert distance units to kilometers
-      distances_km <- as.numeric(units::set_units(distances, "km"))
+      distances_km <- distances / 1000
 
       # Identify indices where distance is below the minimum threshold
       too_close_idx <- which(distances_km < min_km)
@@ -44,7 +50,9 @@ shuffle_min_distance <-
 
       # Replace problematic synthetic points with randomly selected ones
       replacement_indices <- sample(1:n, length(too_close_idx), replace = FALSE)
-      current_synthetic[too_close_idx, ] <- synthetic_data[replacement_indices, ]
+
+      current_synthetic[too_close_idx, ] <-
+        synthetic_data[replacement_indices, ]
     }
 
     # If condition not satisfied within max_tries, throw an error

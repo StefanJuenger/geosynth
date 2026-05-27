@@ -9,23 +9,13 @@ Description: Provides tools to generate synthetic georeferenced data that
     confidential respondent coordinates. The package supports spatial linking 
     workflows by enabling pipeline development, testing, and methodological 
     prototyping outside of secure data access environments.
-License: GPL (>= 3)
+License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
 Imports: 
-    cli,
-    dplyr,
-    purrr,
-    rlang,
-    sf,
-    tidyr
+    sf
 RoxygenNote: 7.3.3
 Depends: 
     R (>= 3.5)
 Suggests: 
-    glue,
-    readr,
-    readxl,
-    stringr,
-    testthat (>= 3.0.0)
 Config/testthat/edition: 3

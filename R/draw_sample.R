@@ -1,13 +1,29 @@
 #' Draw a Sample Based on a Defined Sample Frame
 #'
-#' This function selects a sample of INSPIRE grid cells from a pre-defined sample frame,
-#' considering population data for weighting. It supports randomization.
+#' This function draws a synthetic sample based on a pre-defined sample frame.
+#' Municipalities and INSPIRE grid cells are sampled using population-weighted
+#' probabilities derived from census data. Depending on the selected return
+#' values, the function can return municipality identifiers, INSPIRE grid cell
+#' identifiers, spatial coordinates, or combinations thereof.
 #'
-#' @param sample_frame A custom sample frame, if provided, overrides the default.
-#' @param randomize Logical. If TRUE (default), shuffles the final sample.
-#' @param verbose Show output from function (default TRUE)
+#' @param sample_frame A sample frame created with
+#'   [create_sample_frame()].
+#' @param randomize Logical. If `TRUE` (default), randomizes the order of the
+#'   final sample.
+#' @param return Character vector specifying which information should be
+#'   returned. Possible values are `"inspid1km"`, `"ags"`, and `"coords"`.
+#'   If `"coords"` is included, an `sf` object with geometries is returned.
+#'   Otherwise, a tibble without geometries is returned. Defaults to
+#'   `c("inspid1km", "ags", "coords")`.
+#' @param verbose Logical. Show function progress and status messages
+#'   (default `TRUE`).
 #'
-#' @return A tibble with selected INSPIRE grid cell identifiers.
+#' @return
+#' Depending on `return`, either:
+#'
+#' * an `sf` object containing sampled geometries and selected attributes, or
+#' * a tibble containing sampled municipality and/or INSPIRE grid cell
+#'   identifiers.
 #'
 #' @export
 #'
@@ -17,18 +33,42 @@
 #' data("fake_survey_coordinates")
 #'
 #' sample_frame <-
-#'  geosynth::create_sample_frame(
-#'    .data = fake_survey_coordinates,
-#'    year = "2024",
-#'    geo_unit = "regiostar17",
-#'    inhabitants_threshold = 10000,
-#'    minimum_sample_points = 10
-#'  )
+#'   geosynth::create_sample_frame(
+#'     .data = fake_survey_coordinates,
+#'     year = "2024",
+#'     geo_unit = "regiostar17",
+#'     inhabitants_threshold = 10000,
+#'     minimum_sample_points = 10
+#'   )
 #'
-#' synthetic_sample <- geosynth::draw_sample(sample_frame = sample_frame)
+#' synthetic_sample <-
+#'   geosynth::draw_sample(
+#'     sample_frame = sample_frame
+#'   )
 #'
-#' @export
-draw_sample <- function(sample_frame = NULL, randomize = TRUE, verbose = TRUE) {
+#' synthetic_ags <-
+#'   geosynth::draw_sample(
+#'     sample_frame = sample_frame,
+#'     return = "ags"
+#'   )
+#'
+#' synthetic_coords <-
+#'   geosynth::draw_sample(
+#'     sample_frame = sample_frame,
+#'     return = c("coords", "ags")
+#'   )
+draw_sample <-
+  function(
+    sample_frame = NULL,
+    return = c("inspid1km", "ags", "coords"),
+    randomize = TRUE,
+    verbose = TRUE
+    ) {
+
+    if (length(return) == 0) {
+      return <- c("inspid1km", "ags", "coords")
+    }
+
   if (isTRUE(verbose)) {
     cli::cli_h1("Drawing sample")
 
@@ -175,6 +215,25 @@ draw_sample <- function(sample_frame = NULL, randomize = TRUE, verbose = TRUE) {
     cli::cli_alert_success(
       "Finished drawing sample"
     )
+  }
+
+  return <- match.arg(return, several.ok = TRUE)
+
+  geom_enabled <- "coords" %in% return
+  keep_cols <- setdiff(return, "coords")
+
+  drawn_sample <- do.call(rbind, drawn_list)
+  drawn_sample <- drawn_sample[sample(nrow(drawn_sample), n_final), ]
+
+  if (geom_enabled) {
+    drawn_sample <- sf::st_as_sf(drawn_sample)
+  } else {
+    drawn_sample <- sf::st_drop_geometry(drawn_sample)
+  }
+
+  if (length(keep_cols) > 0) {
+    drawn_sample <-
+      drawn_sample[, intersect(names(drawn_sample), keep_cols), drop = FALSE]
   }
 
   drawn_sample

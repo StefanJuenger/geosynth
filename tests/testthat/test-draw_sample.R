@@ -33,6 +33,66 @@ test_that("draw_sample() returns a valid CRS", {
   expect_false(is.na(sf::st_crs(drawn_sample)))
 })
 
+test_that("draw_sample() returns all outputs by default", {
+
+  result <-
+    draw_sample(
+      sample_frame = sample_frame,
+      verbose = FALSE
+    )
+
+  expect_s3_class(result, "sf")
+  expect_true("ags" %in% names(result))
+  expect_true("inspid1km" %in% names(result))
+  expect_true("geometry" %in% names(result))
+})
+
+test_that("draw_sample() returns tibble without geometry when coords is omitted", {
+
+  result <-
+    draw_sample(
+      sample_frame = sample_frame,
+      return = c("ags", "inspid1km"),
+      verbose = FALSE
+    )
+
+  expect_s3_class(result, "tbl_df")
+  expect_false("sf" %in% class(result))
+
+  expect_true(all(c("ags", "inspid1km") %in% names(result)))
+  expect_false("geometry" %in% names(result))
+})
+
+test_that("draw_sample() returns only ags when requested", {
+
+  result <-
+    draw_sample(
+      sample_frame = sample_frame,
+      return = "ags",
+      verbose = FALSE
+    )
+
+  expect_s3_class(result, "tbl_df")
+
+  expect_identical(names(result), "ags")
+})
+
+test_that("draw_sample() returns sf object when coords is requested", {
+
+  result <-
+    draw_sample(
+      sample_frame = sample_frame,
+      return = c("coords", "ags"),
+      verbose = FALSE
+    )
+
+  expect_s3_class(result, "sf")
+
+  expect_true("geometry" %in% names(result))
+  expect_true("ags" %in% names(result))
+  expect_false("inspid1km" %in% names(result))
+})
+
 # ── Message behaviour ───────────────────────────────────────────────────────
 test_that("create_sample_frame(..., verbose = FALSE) is silent", {
   expect_no_message(

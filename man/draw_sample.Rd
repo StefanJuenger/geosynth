@@ -4,21 +4,42 @@
 \alias{draw_sample}
 \title{Draw a Sample Based on a Defined Sample Frame}
 \usage{
-draw_sample(sample_frame = NULL, randomize = TRUE, verbose = TRUE)
+draw_sample(
+  sample_frame = NULL,
+  return = c("inspid1km", "ags", "coords"),
+  randomize = TRUE,
+  verbose = TRUE
+)
 }
 \arguments{
-\item{sample_frame}{A custom sample frame, if provided, overrides the default.}
+\item{sample_frame}{A sample frame created with
+[create_sample_frame()].}
 
-\item{randomize}{Logical. If TRUE (default), shuffles the final sample.}
+\item{return}{Character vector specifying which information should be
+returned. Possible values are `"inspid1km"`, `"ags"`, and `"coords"`.
+If `"coords"` is included, an `sf` object with geometries is returned.
+Otherwise, a tibble without geometries is returned. Defaults to
+`c("inspid1km", "ags", "coords")`.}
 
-\item{verbose}{Show output from function (default TRUE)}
+\item{randomize}{Logical. If `TRUE` (default), randomizes the order of the
+final sample.}
+
+\item{verbose}{Logical. Show function progress and status messages
+(default `TRUE`).}
 }
 \value{
-A tibble with selected INSPIRE grid cell identifiers.
+Depending on `return`, either:
+
+* an `sf` object containing sampled geometries and selected attributes, or
+* a tibble containing sampled municipality and/or INSPIRE grid cell
+  identifiers.
 }
 \description{
-This function selects a sample of INSPIRE grid cells from a pre-defined sample frame,
-considering population data for weighting. It supports randomization.
+This function draws a synthetic sample based on a pre-defined sample frame.
+Municipalities and INSPIRE grid cells are sampled using population-weighted
+probabilities derived from census data. Depending on the selected return
+values, the function can return municipality identifiers, INSPIRE grid cell
+identifiers, spatial coordinates, or combinations thereof.
 }
 \examples{
 library(geosynth)
@@ -26,14 +47,28 @@ library(geosynth)
 data("fake_survey_coordinates")
 
 sample_frame <-
- geosynth::create_sample_frame(
-   .data = fake_survey_coordinates,
-   year = "2024",
-   geo_unit = "regiostar17",
-   inhabitants_threshold = 10000,
-   minimum_sample_points = 10
- )
+  geosynth::create_sample_frame(
+    .data = fake_survey_coordinates,
+    year = "2024",
+    geo_unit = "regiostar17",
+    inhabitants_threshold = 10000,
+    minimum_sample_points = 10
+  )
 
-synthetic_sample <- geosynth::draw_sample(sample_frame = sample_frame)
+synthetic_sample <-
+  geosynth::draw_sample(
+    sample_frame = sample_frame
+  )
 
+synthetic_ags <-
+  geosynth::draw_sample(
+    sample_frame = sample_frame,
+    return = "ags"
+  )
+
+synthetic_coords <-
+  geosynth::draw_sample(
+    sample_frame = sample_frame,
+    return = c("coords", "ags")
+  )
 }

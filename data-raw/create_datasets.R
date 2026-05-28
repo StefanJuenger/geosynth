@@ -49,10 +49,6 @@ create_census_inhabitants <- function() {
         })
     )
 
-  # remove coordindates to save storage. can be re-added later.
-  # census_inhabitants <-
-  #   sf::st_drop_geometry(census_inhabitants)
-
   usethis::use_data(census_inhabitants, compress = "xz", overwrite = TRUE)
 }
 
@@ -80,7 +76,7 @@ create_municipalities_inhabitants <- function() {
       if (year < 2015) {
         regiostar_data <-
           readxl::read_excel(
-            "./data-raw/2024 RegioStaR-Referenzdateien_Mobilthek.xlsx",
+            "./data-raw/2024_RegioStaR-Referenzdateien_Mobilthek.xlsx",
             sheet = "ReferenzGebietsstand2015"
           ) |>
           dplyr::rename_with(stringr::str_to_lower)
@@ -97,20 +93,21 @@ create_municipalities_inhabitants <- function() {
       regiostar_data <-
         regiostar_data |>
         dplyr::rename(ags = 1) |>
+        dplyr::rename_with(~"inhabitants", dplyr::contains("bev")) |>
         dplyr::mutate(ags = stringr::str_pad(ags, 8, pad = "0")) |>
-        dplyr::select(ags, dplyr::contains("regiostar"))
+        dplyr::select(ags, inhabitants, dplyr::contains("regiostar"))
 
       # Load shapefile, transform spatial reference, rename columns, and process municipality data
       joined_data <-
         sf::read_sf(glue::glue("./data-raw/", .x)) |>
         sf::st_drop_geometry() |>
-        # sf::st_transform(3035) |> # Transform to EPSG:3035 (European LAEA projection)
         dplyr::rename_all(toupper) |> # Convert column names to uppercase
-        dplyr::transmute(
+        dplyr::mutate(
           lan = AGS |> stringr::str_sub(1, 2), # Extract state code
-          ags = AGS |> stringr::str_sub(1, 8), # Ensure 8-digit municipality code
-          inhabitants = EWZ,
-
+          ags = AGS |> stringr::str_sub(1, 8) # Ensure 8-digit municipality code
+        ) |>
+        dplyr::left_join(regiostar_data, by = "ags") |> # Merge with RegioStaR reference data
+        dplyr::mutate(
           # Classify population into groups (gkpol) based on population size (inhabitants)
           gkpol = dplyr::case_when(
             inhabitants <= 1999 ~ 1,
@@ -124,10 +121,10 @@ create_municipalities_inhabitants <- function() {
           ),
           inhabitants # Keep total population column
         ) |>
-        dplyr::left_join(regiostar_data, by = "ags") |> # Merge with RegioStaR reference data
         dplyr::select(
           lan, ags, gkpol, regiostar7, regiostar17, inhabitants
-        )
+        ) |>
+        dplyr::filter(!is.na(inhabitants))
 
       file_name <- paste0("mun_", year)
 

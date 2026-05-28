@@ -15,7 +15,8 @@ LazyData: true
 Imports: 
     sf,
     tibble,
-    cli
+    cli,
+    ffm
 Suggests:
     testthat (>= 3.0.0),
     covr,

@@ -117,7 +117,7 @@ shuffle_min_distance <-
 
     if (isTRUE(verbose)) {
       cli::cli_progress_done(id = pb)
-      cli::cli_alert_error(
+      cli::cli_alert_danger(
         "Could not satisfy minimum distance after {max_tries} tries"
       )
     }

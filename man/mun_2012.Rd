@@ -23,35 +23,35 @@ A data frame with ~11,000 rows (depending on the year) and 6 columns:
   \item{ags_YEAR}{8-digit German municipality identifier ("Allgemeiner Gemeindeschlüssel")}
   \item{gkpol}{1-digit political municipality size class identifier ("Politische Gemeindegrößenklasse"), see \url{https://www.bbsr.bund.de/BBSR/DE/forschung/raumbeobachtung/Raumabgrenzungen/deutschland/gemeinden/StadtGemeindetyp/StadtGemeindetyp.html}}
   \item{regiostar7}{2-digit summarized regional spatial typology statistic identifier ("Regionalstatistische Raumtypologie, Zusammengefasster regionalstatischer Raumtyp"), see \url{https://www.bmv.de/SharedDocs/DE/Artikel/G/regionalstatistische-raumtypologie.html}}
-  \item{regiostar17}{3- digit regional spatial statistic type identifier "Regionalstatistische Raumtypologie, Regionalstatischer Raumtyp", see \url{https://www.bmv.de/SharedDocs/DE/Artikel/G/regionalstatistische-raumtypologie.html}}
+  \item{regiostar17}{3-digit regional spatial statistic type identifier ("Regionalstatistische Raumtypologie, Regionalstatischer Raumtyp"), see \url{https://www.bmv.de/SharedDocs/DE/Artikel/G/regionalstatistische-raumtypologie.html}}
   \item{inhabitants}{Inhabitants count in absolute numbers}
 }
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11444 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11093 rows and 6 columns.
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11379 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11105 rows and 6 columns.
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11330 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11116 rows and 6 columns.
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11305 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11121 rows and 6 columns.
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11271 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11088 rows and 6 columns.
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11264 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11083 rows and 6 columns.
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11224 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11043 rows and 6 columns.
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11007 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11005 rows and 6 columns.
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 11001 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 10999 rows and 6 columns.
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 10994 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 10992 rows and 6 columns.
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 10990 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 10988 rows and 6 columns.
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 10978 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 10976 rows and 6 columns.
 
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 10956 rows and 6 columns.
+An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 10954 rows and 6 columns.
 }
 \source{
 https://opendata-esridech.hub.arcgis.com
@@ -88,6 +88,9 @@ mun_2023
 mun_2024
 }
 \description{
-Municipality Level Data
+These datasets contain municipality-level administrative and regional
+classification variables for Germany for multiple years. They are used
+as lookup tables for spatial enrichment and sample frame construction
+within the `geosynth` package.
 }
 \keyword{datasets}

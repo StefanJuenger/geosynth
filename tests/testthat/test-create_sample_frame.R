@@ -164,3 +164,64 @@ test_that("create_sample_frame() errors informatively on missing year", {
     )
   )
 })
+
+test_that("create_sample_frame() accepts alternative municipality identifiers", {
+
+  data("fake_survey_coordinates")
+
+  fake_data <- fake_survey_coordinates
+
+  fake_data$municipality_id <- fake_data$ags
+  fake_data$ags <- NULL
+
+  result <-
+    create_sample_frame(
+    .data = fake_data,
+    year = "2024",
+    mun_id = "municipality_id",
+    geo_unit = "regiostar17",
+    verbose = TRUE
+  )
+
+  expect_s3_class(result, "tbl_df")
+
+  expect_true("year" %in% names(result))
+})
+
+test_that("create_sample_frame() derives AGS from geometry", {
+
+  data("fake_survey_coordinates")
+
+  fake_data <- fake_survey_coordinates
+
+  fake_data$ags <- NULL
+
+  result <-
+    create_sample_frame(
+    .data = fake_data,
+    year = "2024",
+    geo_unit = "regiostar17",
+    verbose = TRUE
+  )
+
+  expect_s3_class(result, "tbl_df")
+
+  expect_true("year" %in% names(result))
+})
+
+test_that("create_sample_frame() fails without municipality identifiers", {
+
+  fake_data <- data.frame(
+    x = 1:10,
+    y = 1:10
+  )
+
+  expect_error(
+    create_sample_frame(
+      .data = fake_data,
+      year = "2024",
+      verbose = FALSE
+    ),
+    "No municipality identifier available"
+  )
+})

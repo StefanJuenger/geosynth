@@ -7,6 +7,7 @@
 create_sample_frame(
   .data,
   year,
+  mun_id = NULL,
   geo_unit = c("gkpol", "regiostar7", "regiostar17"),
   inhabitants_threshold = 50000,
   minimum_sample_points = 10,
@@ -14,41 +15,70 @@ create_sample_frame(
 )
 }
 \arguments{
-\item{.data}{A data frame containing georeferenced sample data with `AGS` identifiers.}
+\item{.data}{A data frame or `sf` object containing georeferenced sample
+data. Municipality identifiers can either be stored in an `ags` column,
+another column specified via `mun_id`, or derived spatially from
+geometry information.}
 
-\item{year}{The year for which the sample frame is created (used to fetch municipality data).}
+\item{year}{The year for which the sample frame is created. Used to load
+municipality geometries and metadata.}
 
-\item{geo_unit}{A character vector specifying the geographic unit to be used,
-defaulting to `c("gkpol", "regiostar7", "regiostar17")`.}
+\item{mun_id}{Optional character string specifying the column containing
+municipality identifiers if different from `ags`.}
 
-\item{inhabitants_threshold}{The minimum population required for inclusion (default: 50,000).}
+\item{geo_unit}{A character vector specifying the geographic aggregation
+unit. Must be one of `c("gkpol", "regiostar7", "regiostar17")`.}
 
-\item{minimum_sample_points}{The minimum required sample points per geographic unit (default: 10).}
+\item{inhabitants_threshold}{Minimum number of inhabitants required for
+inclusion in a geographic unit. Defaults to `50000`.}
 
-\item{verbose}{Show output from function (default TRUE)}
+\item{minimum_sample_points}{Minimum number of municipalities required
+within a geographic unit. Defaults to `10`.}
+
+\item{verbose}{Logical indicating whether progress information should be
+printed. Defaults to `TRUE`.}
 }
 \value{
-A tibble with municipality-level sample information.
+A tibble containing municipality-level sample frame information.
 }
 \description{
-This function constructs a sample frame based on geographic units and population thresholds,
-ensuring a minimum number of sampling points. The function enriches the dataset with
-municipal information, aggregates data at various geographic levels, and ensures sampling
-requirements are met before merging the results into a final frame.
+This function constructs a municipality-level sample frame based on
+geographic units and population thresholds while ensuring a minimum
+number of sampling points per aggregation unit.
+}
+\details{
+The input data are enriched with municipality-level information derived
+from official municipality geometries. Municipality identifiers can be
+supplied either through an existing `ags` column, an alternative
+identifier column specified via `mun_id`, or spatially derived from
+geometries if `.data` is an `sf` object.
+
+The function aggregates observations across geographic units, evaluates
+sample size constraints, and adjusts underpopulated units before merging
+the results back onto municipality geometries.
 }
 \examples{
-# Sample data for the year 2024 with a population threshold of 100,000
+# Example using AGS identifiers already contained in the data
 library(geosynth)
 
 data("fake_survey_coordinates")
 
 sample_frame <-
- geosynth::create_sample_frame(
-   .data = fake_survey_coordinates,
-   year = "2024",
-   geo_unit = "regiostar17",
-   inhabitants_threshold = 10000,
-   minimum_sample_points = 10
- )
+  geosynth::create_sample_frame(
+    .data = fake_survey_coordinates,
+    year = "2024",
+    geo_unit = "regiostar17",
+    inhabitants_threshold = 10000,
+    minimum_sample_points = 10
+  )
+
+# Example using a custom municipality identifier column
+# sample_frame <-
+#   geosynth::create_sample_frame(
+#     .data = fake_survey_coordinates,
+#     year = "2024",
+#     mun_id = "municipality_id",
+#     geo_unit = "regiostar17"
+#   )
 
 }

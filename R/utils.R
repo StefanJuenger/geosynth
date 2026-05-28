@@ -48,7 +48,8 @@ resolve_ags <- function(
       )
     }
 
-    mun_data <- ffm::bkg_admin_archive(level = "gem", year = year)
+    mun_data <-
+      ffm::bkg_admin_archive(level = "gem", year = year, timeout = 600)
 
     mun_data_ags <- mun_data |> sf::st_drop_geometry() |> _[, "AGS"]
     names(mun_data_ags) <- "ags"

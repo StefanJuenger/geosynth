@@ -9,6 +9,25 @@ load_census <- function() {
 }
 
 #' @noRd
+intersect_or_nearest <- function(x, y, ...) {
+
+  hits <- sf::st_intersects(x, y, ...)
+
+  empty <- lengths(hits) == 0
+
+  if (any(empty)) {
+    nearest <- sf::st_nearest_feature(
+      x[empty, ],
+      y
+    )
+
+    hits[empty] <- lapply(nearest, function(i) i)
+  }
+
+  hits
+}
+
+#' @noRd
 resolve_ags <- function(
     .data,
     year,
@@ -51,6 +70,8 @@ resolve_ags <- function(
     mun_data <-
       ffm::bkg_admin_archive(level = "gem", year = year, timeout = 600)
 
+    mun_data <- mun_data[mun_data$GF == 4, ]
+
     mun_data_ags <- mun_data |> sf::st_drop_geometry() |> _[, "AGS"]
     names(mun_data_ags) <- "ags"
     mun_data <- cbind(mun_data_ags, mun_data[, "geometry"])
@@ -64,7 +85,7 @@ resolve_ags <- function(
       sf::st_join(
         .data,
         mun_data[, "ags"],
-        join = sf::st_nearest_feature,
+        join = intersect_or_nearest,
         left = TRUE
       )
 

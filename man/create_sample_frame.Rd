@@ -15,28 +15,28 @@ create_sample_frame(
 )
 }
 \arguments{
-\item{.data}{A data frame or `sf` object containing georeferenced sample
-data. Municipality identifiers can either be stored in an `ags` column,
-another column specified via `mun_id`, or derived spatially from
+\item{.data}{A data frame or sf object containing georeferenced sample
+data. Municipality identifiers can either be stored in an ags column,
+another column specified via mun_id, or derived spatially from
 geometry information.}
 
 \item{year}{The year for which the sample frame is created. Used to load
 municipality geometries and metadata.}
 
 \item{mun_id}{Optional character string specifying the column containing
-municipality identifiers if different from `ags`.}
+municipality identifiers if different from ags.}
 
 \item{geo_unit}{A character vector specifying the geographic aggregation
-unit. Must be one of `c("gkpol", "regiostar7", "regiostar17")`.}
+unit. Must be one of c("gkpol", "regiostar7", "regiostar17").}
 
 \item{inhabitants_threshold}{Minimum number of inhabitants required for
-inclusion in a geographic unit. Defaults to `50000`.}
+inclusion in a geographic unit. Defaults to 50000.}
 
 \item{minimum_sample_points}{Minimum number of municipalities required
-within a geographic unit. Defaults to `10`.}
+within a geographic unit. Defaults to 10.}
 
 \item{verbose}{Logical indicating whether progress information should be
-printed. Defaults to `TRUE`.}
+printed. Defaults to TRUE.}
 }
 \value{
 A tibble containing municipality-level sample frame information.
@@ -49,16 +49,16 @@ number of sampling points per aggregation unit.
 \details{
 The input data are enriched with municipality-level information derived
 from official municipality geometries. Municipality identifiers can be
-supplied either through an existing `ags` column, an alternative
-identifier column specified via `mun_id`, or spatially derived from
-geometries if `.data` is an `sf` object.
+supplied either through an existing ags column, an alternative
+identifier column specified via mun_id, or spatially derived from
+geometries if .data is an sf object.
 
 The function aggregates observations across geographic units, evaluates
-sample size constraints, and adjusts underpopulated units before merging
-the results back onto municipality geometries.
+sample size constraints, and reassigns municipalities from underpopulated
+units to the nearest valid geographic unit before merging the results
+back onto municipality geometries.
 }
 \examples{
-# Example using AGS identifiers already contained in the data
 library(geosynth)
 
 data("fake_survey_coordinates")
@@ -80,5 +80,4 @@ sample_frame <-
 #     mun_id = "municipality_id",
 #     geo_unit = "regiostar17"
 #   )
-
 }

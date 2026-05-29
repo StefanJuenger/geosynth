@@ -20,8 +20,11 @@ Imports:
 Suggests:
     testthat (>= 3.0.0),
     covr,
-    dplyr
+    dplyr,
+    knitr,
+    rmarkdown
 RoxygenNote: 7.3.3
 Depends: 
     R (>= 4.2.0)
 Config/testthat/edition: 3
+VignetteBuilder: knitr

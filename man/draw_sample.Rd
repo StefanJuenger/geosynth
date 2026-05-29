@@ -7,7 +7,7 @@
 draw_sample(
   sample_frame = NULL,
   return = c("inspid1km", "ags", "coords"),
-  randomize = TRUE,
+  shuffle = TRUE,
   verbose = TRUE
 )
 }
@@ -21,7 +21,7 @@ If `"coords"` is included, an `sf` object with geometries is returned.
 Otherwise, a tibble without geometries is returned. Defaults to
 `c("inspid1km", "ags", "coords")`.}
 
-\item{randomize}{Logical. If `TRUE` (default), randomizes the order of the
+\item{shuffle}{Logical. If `TRUE` (default), shuffles the order of the
 final sample.}
 
 \item{verbose}{Logical. Show function progress and status messages

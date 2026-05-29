@@ -68,7 +68,7 @@ resolve_ags <- function(
     }
 
     mun_data <-
-      ffm::bkg_admin_archive(level = "gem", year = year, timeout = 600)
+      ffm::bkg_admin_archive(level = "gem", year = year, timeout = 1200)
 
     mun_data <- mun_data[mun_data$GF == 4, ]
 

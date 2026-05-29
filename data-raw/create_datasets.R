@@ -28,10 +28,7 @@ create_census_inhabitants <- function() {
 
           # Load municipality shape data
           municipalities_shape <-
-            glue::glue(
-              "./data-raw/Gemeindegrenzen_{year}_mit_Einwohnerzahl.geojson"
-            ) |>
-            sf::st_read() |>
+            ffm::bkg_admin_archive(level = "gem", year = year) |>
             sf::st_transform(3035) |>
             dplyr::rename_with(stringr::str_to_lower)
 
@@ -39,12 +36,12 @@ create_census_inhabitants <- function() {
           sf::st_join(
             census_inhabitants,
             municipalities_shape["ags"],
-            join = sf::st_nearest_feature
+            join = intersect_or_nearest
           ) |>
             dplyr::select(dplyr::starts_with("ags")) |>
             dplyr::rename_with(
               ~ paste0("ags_", year), dplyr::starts_with("ags")
-              ) |>
+            ) |>
             sf::st_drop_geometry()
         })
     )
@@ -56,86 +53,95 @@ create_census_inhabitants <- function() {
 #'
 #' This (internal) function processes municipality population data from shapefiles, transforms
 #' the spatial data, assigns administrative codes (AGS), classifies population groups,
-#' merges with RegioStaR reference data, and saves the results as RDS files.
+#' merges with RegioStaR reference data, and saves the results as RDA files.
 #'
-#' @return Saves RDS files for each year containing processed municipality data.
-#' @import readxl
-#' @import sf
-#' @import dplyr
-#' @import stringr
-#' @import purrr
-#' @import glue
-#' @import readr
-#' @noRd
-create_municipalities_inhabitants <- function() {
-  list.files("./data-raw/", pattern = "Einwohnerzahl") |> # Find relevant population data files
-    purrr::walk(~{
-      year <- stringr::str_extract(.x, "[0-9]{4}") # Extract year from filename
+#' @return Saves RDA files for each year containing processed municipality data.
+#' @noRdB
+create_municipalities_inhabitants <-
+  function(years = c(2012:2024)) {
+    years |>
+      purrr::walk(~{
+        year <- .x # Extract year from filename
 
-      # Load RegioStaR reference data based on the year
-      if (year < 2015) {
-        regiostar_data <-
-          readxl::read_excel(
+        # Load RegioStaR reference data based on the year
+        if (year < 2015) {
+          tmp <- readxl::read_excel(
             "./data-raw/2024_RegioStaR-Referenzdateien_Mobilthek.xlsx",
-            sheet = "ReferenzGebietsstand2015"
-          ) |>
-          dplyr::rename_with(stringr::str_to_lower)
-      } else {
-        regiostar_data <-
-          readxl::read_excel(
+            sheet = glue::glue("ReferenzGebietsstand2015"),
+            n_max = 0
+          )
+
+          n_cols <- ncol(tmp)
+
+          regiostar_data <- readxl::read_excel(
             "./data-raw/2024_RegioStaR-Referenzdateien_Mobilthek.xlsx",
-            sheet = glue::glue("ReferenzGebietsstand{year}")
+            sheet = glue::glue("ReferenzGebietsstand2015"),
+            col_types = c("text", rep("guess", n_cols - 1))
           ) |>
-          dplyr::rename_with(stringr::str_to_lower)
-      }
+            dplyr::rename_with(stringr::str_to_lower)
+        } else {
+          tmp <- readxl::read_excel(
+            "./data-raw/2024_RegioStaR-Referenzdateien_Mobilthek.xlsx",
+            sheet = glue::glue("ReferenzGebietsstand{year}"),
+            n_max = 0
+          )
 
-      # Prepare RegioStaR data: Rename AGS column, ensure 8-digit codes, and select relevant columns
-      regiostar_data <-
-        regiostar_data |>
-        dplyr::rename(ags = 1) |>
-        dplyr::rename_with(~"inhabitants", dplyr::contains("bev")) |>
-        dplyr::mutate(ags = stringr::str_pad(ags, 8, pad = "0")) |>
-        dplyr::select(ags, inhabitants, dplyr::contains("regiostar"))
+          n_cols <- ncol(tmp)
 
-      # Load shapefile, transform spatial reference, rename columns, and process municipality data
-      joined_data <-
-        sf::read_sf(glue::glue("./data-raw/", .x)) |>
-        sf::st_drop_geometry() |>
-        dplyr::rename_all(toupper) |> # Convert column names to uppercase
-        dplyr::mutate(
-          lan = AGS |> stringr::str_sub(1, 2), # Extract state code
-          ags = AGS |> stringr::str_sub(1, 8) # Ensure 8-digit municipality code
-        ) |>
-        dplyr::left_join(regiostar_data, by = "ags") |> # Merge with RegioStaR reference data
-        dplyr::mutate(
-          # Classify population into groups (gkpol) based on population size (inhabitants)
-          gkpol = dplyr::case_when(
-            inhabitants <= 1999 ~ 1,
-            inhabitants > 1999 & inhabitants <= 4999 ~ 2,
-            inhabitants > 4999 & inhabitants <= 19999 ~ 3,
-            inhabitants > 19999 & inhabitants <= 49999 ~ 4,
-            inhabitants > 49999 & inhabitants <= 99999 ~ 5,
-            inhabitants > 99999 & inhabitants <= 499999 ~ 6,
-            inhabitants > 499999 ~ 7,
-            TRUE ~ NA
-          ),
-          inhabitants # Keep total population column
-        ) |>
-        dplyr::select(
-          lan, ags, gkpol, regiostar7, regiostar17, inhabitants
-        ) |>
-        dplyr::filter(!is.na(inhabitants))
+          regiostar_data <- readxl::read_excel(
+            "./data-raw/2024_RegioStaR-Referenzdateien_Mobilthek.xlsx",
+            sheet = glue::glue("ReferenzGebietsstand{year}"),
+            col_types = c("text", rep("guess", n_cols - 1))
+          ) |>
+            dplyr::rename_with(stringr::str_to_lower)
+        }
 
-      file_name <- paste0("mun_", year)
+        # Prepare RegioStaR data: Rename AGS column, ensure 8-digit codes, and select relevant columns
+        regiostar_data <-
+          regiostar_data |>
+          dplyr::rename(ags = 1) |>
+          dplyr::rename_with(~"inhabitants", dplyr::contains("bev")) |>
+          dplyr::mutate(ags = stringr::str_pad(ags, width = 8, pad = "0")) |>
+          dplyr::select(ags, inhabitants, dplyr::contains("regiostar"))
 
-      assign(file_name, joined_data)
+        # Load shapefile, transform spatial reference, rename columns, and process municipality data
+        joined_data <-
+          ffm::bkg_admin_archive(level = "gem", year = year) |>
+          sf::st_drop_geometry() |>
+          dplyr::mutate(
+            lan = AGS |> stringr::str_sub(1, 2), # Extract state code
+            ags = AGS |> stringr::str_sub(1, 8) # Ensure 8-digit municipality code
+          ) |>
+          dplyr::left_join(regiostar_data, by = "ags") |> # Merge with RegioStaR reference data
+          dplyr::mutate(
+            # Classify population into groups (gkpol) based on population size (inhabitants)
+            gkpol = dplyr::case_when(
+              inhabitants <= 1999 ~ 1,
+              inhabitants > 1999 & inhabitants <= 4999 ~ 2,
+              inhabitants > 4999 & inhabitants <= 19999 ~ 3,
+              inhabitants > 19999 & inhabitants <= 49999 ~ 4,
+              inhabitants > 49999 & inhabitants <= 99999 ~ 5,
+              inhabitants > 99999 & inhabitants <= 499999 ~ 6,
+              inhabitants > 499999 ~ 7,
+              TRUE ~ NA
+            ),
+            inhabitants # Keep total population column
+          ) |>
+          dplyr::select(
+            lan, ags, gkpol, regiostar7, regiostar17, inhabitants
+          ) |>
+          dplyr::filter(!is.na(inhabitants))
 
-      do.call(
-        usethis::use_data,
-        list(as.name(file_name), compress = "xz", overwrite = TRUE)
-      )
-    })
-}
+        file_name <- paste0("mun_", year)
+
+        assign(file_name, joined_data)
+
+        do.call(
+          usethis::use_data,
+          list(as.name(file_name), compress = "xz", overwrite = TRUE)
+        )
+      })
+  }
 
 #' Create Fake Survey Coordinates
 #'

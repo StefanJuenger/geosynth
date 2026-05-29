@@ -121,8 +121,6 @@ create_sample_frame <- function(
   # Enrich observations with municipality attributes
   data_enriched <- merge(data_plain, mun_df, by = "ags", all.x = TRUE)
 
-  data_enriched <- data_enriched[order(data_enriched$id),]
-
   data_enriched$geo_unit <- data_enriched[[geo_unit]]
 
   # Count distinct municipalities within geo-units
@@ -262,22 +260,22 @@ create_sample_frame <- function(
 
     agg_means_new <- agg_means_new[order(agg_means_new$lan),]
 
-    data_enriched_summarized_new <-
+    data_enriched_summarized <-
       merge(
         agg_count_new, agg_means_new,
         by = c("lan", "geo_unit")
       )
 
-    data_enriched_summarized_new <-
+    data_enriched_summarized <-
       merge(
-        data_enriched_summarized_new,
+        data_enriched_summarized,
         mun_agg,
         by = c("lan", "geo_unit"),
         all.x = TRUE,
         sort = FALSE
       )
 
-    data_enriched_summarized_new <- data_enriched_summarized_new[, col_order]
+    data_enriched_summarized <- data_enriched_summarized[, col_order]
   }
 
   # Merge sample statistics back onto municipality geometry
@@ -286,10 +284,10 @@ create_sample_frame <- function(
   result <-
     merge(
       municipality_shape,
-      data_enriched_summarized_new[
+      data_enriched_summarized[
         ,
         !names(
-          data_enriched_summarized_new) %in% c(
+          data_enriched_summarized) %in% c(
             "inhabitants", "inhabitants_geo_unit"
           )
       ],

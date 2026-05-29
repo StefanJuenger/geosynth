@@ -5,11 +5,12 @@ data("fake_survey_coordinates", package = "geosynth")
 # ── Output structure ───────────────────────────────────────────────────────────
 
 test_that("create_sample_frame() returns a tibble / data frame", {
-  result <- create_sample_frame(
-    .data    = fake_survey_coordinates,
-    year     = "2022",
-    geo_unit = "regiostar17"
-  )
+  result <-
+    create_sample_frame(
+      .data    = fake_survey_coordinates,
+      year     = "2022",
+      geo_unit = "regiostar17"
+    )
   expect_s3_class(result, "data.frame")
 })
 
@@ -176,12 +177,12 @@ test_that("create_sample_frame() accepts alternative municipality identifiers", 
 
   result <-
     create_sample_frame(
-    .data = fake_data,
-    year = "2024",
-    mun_id = "municipality_id",
-    geo_unit = "regiostar17",
-    verbose = TRUE
-  )
+      .data = fake_data,
+      year = "2024",
+      mun_id = "municipality_id",
+      geo_unit = "regiostar17",
+      verbose = TRUE
+    )
 
   expect_s3_class(result, "tbl_df")
 
@@ -198,11 +199,11 @@ test_that("create_sample_frame() derives AGS from geometry", {
 
   result <-
     create_sample_frame(
-    .data = fake_data,
-    year = "2024",
-    geo_unit = "regiostar17",
-    verbose = TRUE
-  )
+      .data = fake_data,
+      year = "2024",
+      geo_unit = "regiostar17",
+      verbose = TRUE
+    )
 
   expect_s3_class(result, "tbl_df")
 

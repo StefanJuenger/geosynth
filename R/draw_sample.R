@@ -8,7 +8,7 @@
 #'
 #' @param sample_frame A sample frame created with
 #'   [create_sample_frame()].
-#' @param randomize Logical. If `TRUE` (default), randomizes the order of the
+#' @param shuffle Logical. If `TRUE` (default), shuffles the order of the
 #'   final sample.
 #' @param return Character vector specifying which information should be
 #'   returned. Possible values are `"inspid1km"`, `"ags"`, and `"coords"`.
@@ -61,7 +61,7 @@ draw_sample <-
   function(
     sample_frame = NULL,
     return = c("inspid1km", "ags", "coords"),
-    randomize = TRUE,
+    shuffle = TRUE,
     verbose = TRUE
     ) {
 
@@ -74,8 +74,9 @@ draw_sample <-
 
     cli::cli_bullets(c(
       "*" = "Year: {sample_frame$year[1]}",
-      "*" = "Municipalities in sample frame: {nrow(sample_frame)}",
-      "*" = "Randomization: {randomize}"
+      "*" = "Municipalities in sample frame: {nrow(sample_frame[!is.na(sample_frame$n_resp_geo_unit),])}",
+      "*" = "Requested output: {return}",
+      "*" = "Final shuffle: {shuffle}"
     ))
   }
 
@@ -89,12 +90,12 @@ draw_sample <-
   census_inhabitants <- load_census()
 
   # ---- Step 1: Select Municipalities for Sampling ----
-  mun_attrs <- sf::st_drop_geometry(municipalities_shape)[
-    , c("ags", "inhabitants")
-  ]
+  mun_attrs <-
+    sf::st_drop_geometry(municipalities_shape)[, c("ags", "inhabitants")]
 
   sample_municipalities <- merge(
-    sample_frame, mun_attrs,
+    sample_frame,
+    mun_attrs,
     by = c("ags", "inhabitants"),
     all.x = TRUE
   )
@@ -187,8 +188,6 @@ draw_sample <-
 
   drawn_sample <- do.call(rbind, drawn_list)
 
-  drawn_sample <- drawn_sample[sample(nrow(drawn_sample), n_final), ]
-
   if (isTRUE(verbose)) {
     cli::cli_progress_done(id = pb)
   }
@@ -200,30 +199,28 @@ draw_sample <-
   drawn_sample <-
     drawn_sample[!(drawn_sample$ags %in% evil_municipalities), ]
 
+  drawn_sample <-
+    drawn_sample[sample(nrow(drawn_sample), n_final, replace = TRUE), ]
+
   if (isTRUE(verbose)) {
     cli::cli_alert_success(
       "Sample of {nrow(drawn_sample)} coordinates drawn"
     )
   }
 
-  # Randomize the sample if required
-  if (isTRUE(randomize)) {
+  # Shuffle the sample if required
+  if (isTRUE(shuffle)) {
     drawn_sample <- drawn_sample[sample(nrow(drawn_sample)), ]
   }
 
   if (isTRUE(verbose)) {
-    cli::cli_alert_success(
-      "Finished drawing sample"
-    )
+    cli::cli_alert_success("Finished drawing sample")
   }
 
   return <- match.arg(return, several.ok = TRUE)
 
   geom_enabled <- "coords" %in% return
   keep_cols <- setdiff(return, "coords")
-
-  drawn_sample <- do.call(rbind, drawn_list)
-  drawn_sample <- drawn_sample[sample(nrow(drawn_sample), n_final), ]
 
   if (geom_enabled) {
     drawn_sample <- sf::st_as_sf(drawn_sample)

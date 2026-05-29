@@ -73,11 +73,13 @@ test_that("create_sample_frame() excludes municipalities below inhabitants_thres
   ags_evil_cases <-
     dplyr::left_join(
       fake_survey_coordinates,
-      dplyr::select(gem_2022, ags, inhabitants)
+      dplyr::select(gem_2022, ags, inhabitants),
+      relationship = "many-to-many"
     ) |>
     dplyr::left_join(
       result |>
-        dplyr::select(ags, n_geo_unit)
+        dplyr::select(ags, n_geo_unit),
+      relationship = "many-to-many"
     ) |>
     dplyr::filter(inhabitants < 100000, n_geo_unit < 10) |>
     dplyr::select(ags) |>
